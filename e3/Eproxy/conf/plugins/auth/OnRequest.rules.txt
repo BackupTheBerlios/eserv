@@ -1,0 +1,10 @@
+' AUTH-PARAMS uAuthServer !
+
+S" plugins\auth\IpAuth" EvalRules
+\ UID @ 0= | AuthMethod: plugins\auth\NtLogon  LOGIN
+
+\ Если IpAuth не установил пользователя по IP, и если в запросе
+\ указана явная авторизация - есть имя и пароль, то авторизуем
+\ пользователя по AuthDomains (не из этого каталога, а CommonPlugins)
+
+UID @ 0= | User NIP | EvalRules: AuthDomains

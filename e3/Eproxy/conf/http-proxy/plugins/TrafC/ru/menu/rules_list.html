@@ -1,0 +1,158 @@
+{ S" ..\..\scripts\" SOURCE-NAME!
+  S" list_rules.f" Included
+  S" "
+}
+
+<h2>Правила назначения виртуальных каналов</h2>
+<font color=red>
+{S" action" IsSet [IF] DoAction [ELSE] S" " [THEN] }</font>
+<hr>
+<h3>Существующие правила<small> (<a href="rules_plaintext.html">простой текст</a>)</small></h3> 
+<form action={script_name}>
+<input type=hidden name=action value=delete>
+
+<font face="Courier New">
+<table border=1 width="98%">
+<tr><th>del?</th><th>Условие</th><th>Действие</th></tr>
+{ReadCfg}
+</table>
+</font>
+
+<p>
+Эти правила применяются для каждого запроса. Каналы назначаются аддитивно.
+</p>
+
+<p>
+<input type=submit value="Удалить выбранные">
+</p>
+</form>
+
+<hr>
+<h3>Добавление правила</h3>
+
+<form action={script_name}>
+<input type=hidden name=action value=add_rule_1>
+
+<table border=1 cellpadding=3 width=98%>
+
+<tr><th> <a href="../docs/man.rules.html">Условие</a>:</th>
+<td>
+
+<table border=0>
+<tr>
+<td>
+   <select name=select_cond>
+    <option value="IP="         >IP=         
+    <option value="Port="       >Port=       
+    <option value="IP:Port="    >IP:Port=    
+    <option value="PeerIP:Port=">PeerIP:Port= 
+    <option value="PeerIP="     >PeerIP=     
+    <option value="PeerPort="   >PeerPort=   
+    <option value="PeerIP:Mask=">PeerIP:Mask= 
+    <option value="CLIENT =~"   >CLIENT =~   
+    <option value="User =~"     >User =~     
+    <option value="URL =~"      >URL =~      
+    <option value="TRUE"        >TRUE
+   </select>
+</td>
+<td>
+  <input name=cond_str size=27>  
+</td>
+</tr>
+</table>
+
+</td>
+</tr>
+
+<tr><th>  
+<acronym title="При назначении канала необходимо выбрать направление трафика, который пойдет через него.">
+  Назначение:
+</acronym>
+
+</th>
+<td>  
+
+<table border=1 cellpadding=1 cellspacing=0 width=100%>
+
+<tr> <th> </th>
+<th> Имя Канала </th>
+
+<th> 
+<acronym title="От прокси к клиенту">
+  Входное  
+</acronym>
+
+</th> 
+
+<th> 
+<acronym title="От клиента к прокси">
+  Выходное
+</acronym>
+
+</th> 
+
+<th> 
+<acronym title="отмена назначения канала">
+  Оставить 
+</acronym>
+</th>
+
+</tr>
+
+<tr> <th ROWSPAN={ #Bands 1+}> Bands </th> <td> </tr>
+{ ' SelectName ' ForBands GetList }
+
+<tr> <th ROWSPAN={ #Quotas 1+}> Quotas </th> </tr>
+{ ' SelectName ' ForQuotas GetList }
+</table>
+
+(Достаточно выбрать только нужные каналы)
+
+<table border=1 cellpadding=3 width=100%>
+<tr><td>
+    <a href=../docs/man.html#priority>Приоритет</a>:
+    <input name=pr_str size=6>  
+</td><td align=center>
+    <a href=../docs/man.rules.html#eof>\EOF</a>
+    <input type=checkbox name=_eof>
+</td></tr>
+</table>
+
+</td></tr>
+
+
+</table>
+
+<p>
+Для каждого запроса, удовлетворяющего выбранному условию,
+будут назначены выбранные каналы и приоритет.
+</p>
+
+<p>
+<input type=submit value="Добавить правило"> 
+</p>
+
+</form>
+
+
+<hr>
+
+<h3>Добавление другого правила</h3>
+
+<p>
+Если правило не подходит под приведенный выше шаблон,
+то его можно ввести здесь.
+</p>
+
+<font face="Courier New">
+<form action={script_name}>
+<input type=hidden name=action value=add_rule>
+Строка: <input name=rule_str size=65>  <br> <br>
+<input type=submit value="Добавить"> <br>
+</form>
+
+</font>
+
+<hr>
+Изменения вступают в силу немедленно.
+<hr>

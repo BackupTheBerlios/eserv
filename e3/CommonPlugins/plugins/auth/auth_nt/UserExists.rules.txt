@@ -1,0 +1,30 @@
+SetNtServer
+
+[UNDEFINED] ForEachUser [IF]
+
+WINAPI: NetUserEnum             NETAPI32.DLL
+WINAPI: NetApiBufferFree        NETAPI32.DLL
+
+
+: ForEachUser { xt \ totalentries entriesread bufptr -- }
+  0 ^ totalentries ^ entriesread 
+  -1 ( MAX_PREFERRED_LENGTH) ^ bufptr
+  0 ( filter ) 0 ( level) AuthServer >UNICODE DROP ( server)
+  NetUserEnum 0= ( NERR_Success)
+  IF bufptr entriesread 0 ?DO I CELLS OVER + @ xt EXECUTE LOOP DROP THEN
+  bufptr NetApiBufferFree DROP
+;
+USER NUE_flag
+: (NtUserExists) ( addr -- )
+  UASCIIZ> UNICODE>
+  User COMPARE-U 0= IF TRUE NUE_flag ! THEN
+;
+: NtUserExists
+  NUE_flag 0!
+  ['] (NtUserExists) ForEachUser
+  NUE_flag @
+;
+
+[THEN]
+
+NtUserExists

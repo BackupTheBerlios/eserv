@@ -1,0 +1,8 @@
+\ Plugin: plugins\console
+Plugin: plugins\service
+Plugin: plugins\mlogc
+Plugin: pop\plugins\callback
+
+Listen:
+{POP[Port]} {POP[NetworkInterface]}
+{IMAP[Port]} {IMAP[NetworkInterface]}

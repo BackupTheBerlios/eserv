@@ -1,0 +1,11 @@
+\ Этот файл вычисляется для каждого заголовка письма.
+\ Имя заголовка в HEADER-NAME, а полная строка - в HEADER-STR.
+\ Можно менять заголовок командой SetHeader, например:
+\ S" Subject: other text" SetHeader
+\ Или удалять заголовок: S" " SetHeader
+
+\ Удаление строк X-... из заголовков (просто пример)
+HEADER-NAME 2 MIN S" X-" COMPARE 0= | S" " SetHeader \EOF
+
+\ Выполняем файл обработки поля заголовка, если этот файл есть:
+EvalRulesIfExists: plugins\pop2smtp\headers\{HEADER-NAME}

@@ -1,0 +1,2 @@
+install.html;Установить сервис
+uninstall.html;Удалить сервис

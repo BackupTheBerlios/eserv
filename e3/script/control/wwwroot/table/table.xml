@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<!--<?xml-stylesheet type="text/xsl" href="table.xsl" ?>-->
+<Table Error="{start}" Name="{table}" CurrentRow="{r}" RunSql="{runsql EVAL-FILE}">
+{table SqlQueryXmlFile}
+</Table>

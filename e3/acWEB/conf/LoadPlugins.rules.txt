@@ -1,0 +1,8 @@
+\ Plugin: plugins\console
+Plugin: plugins\service
+Plugin: plugins\mlogc
+Plugin: plugins\include_url
+Plugin: http\plugins\apache_log
+Plugin: http\plugins\list_dir
+Plugin: http\plugins\ssi
+\ Plugin: plugins\telnet

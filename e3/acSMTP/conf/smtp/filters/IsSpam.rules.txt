@@ -1,0 +1,24 @@
+\ Проверка на спам с помощью PopFile (www.eserv.ru/PopFile)
+
+\ Правила, исключающие спам-проверку:
+\ 1. Не проверяем письма, больше заданного размера
+\ 2-3. Не проверяем письма от клиентов с заданными IP и локальных клиентов
+\ 4. Не проверяем письма от клиентов с заданными адресами отправителей
+\ 5. Не проверяем письма от авторизованных клиентов, 
+\    если CheckAuthorizedSenders=FALSE
+
+MESSAGE-SIZE AntispamPopFile[MaxMessageSize]        >NUM >   | 0 \EOF
+CLIENT       AntispamPopFile[PopFileIpWhiteList]    IsInFile | 0 \EOF
+CLIENT       Lists[LocalNetworks]                   IsInFile | 0 \EOF
+MAILFROM     AntispamPopFile[PopFileFromWhiteList]  IsInFile | 0 \EOF
+UID @ AntispamPopFile[CheckAuthorizedSenders] >FLAG 0= AND   | 0 \EOF
+
+\ Проверяем письмо через PopFile и запоминаем полученную классификацию
+\ в переменной MESSAGE-CLASS (может пригодиться и другим фильтрам)
+
+" {ModuleDirName}{CURRENT-FILE}" STR@ PopFileClassify SetMessageClass 
+
+\ Если PopFile говорит, что это спам, то возвращаем TRUE в вызвавший скрипт
+\ (он в свою очередь решит, что отвечать отправителю письма)
+
+MESSAGE-CLASS =~ spam

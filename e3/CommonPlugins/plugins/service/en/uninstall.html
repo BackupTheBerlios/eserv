@@ -1,0 +1,10 @@
+{
+ S" ..\scripts\install.f" INCLUDED S" "
+}
+<h2>Uninstall service</h2>
+<font color=red>
+{IsServiceStarted
+[IF] StopService 2DROP UninstallService
+[ELSE] UninstallService [THEN]
+}</font>
+</form>

@@ -1,0 +1,29 @@
+<html>
+<head>
+<title>The configuration of proxy security</title>
+</head>
+<body>
+<h2>The configuration of proxy security</h2>
+<p>
+Attempt of autoconfiguration of proxy security will be 
+now made. Thus the list of local subnets, access to proxy 
+from which will be allowed, will be created. Connections 
+to proxy from external networks will be prohibited.
+<p>
+For reliable detection what IP-address of your 
+server is accessible from the outside, one attempt of a 
+direct connection with the external web-server will be 
+made. After that the file with customizations of security
+({S" http-proxy\ip-list" RulesFile STR@}) will be created.
+You can customize access rights manually in more details 
+through the proxy control interface. The given automatic
+customization is intended for exception of the not 
+authorized access at the first call to the not configured
+server.
+<h3>Results of automatic configuration:</h3>
+{CreateIPlist}
+<p>
+<a href={S" from" GetParam _debase64}>Click here to return 
+to a source page</a>
+</body>
+</html>

@@ -1,0 +1,14 @@
+\ ( раскомментировать для отладки: ) uHttpDebug ON LogLevel: 7
+
+METHOD =~ CONNECT | TARGET-PORT 443 <> TARGET-PORT 4843 <> AND TARGET-PORT 4430 <> AND | Disabled \EOF
+
+IsLocalWebRequest | S" http-proxy\LocalWeb" SetAction \EOF
+
+S" http-proxy\ip-list" RulesFile STR@ FileExists 0= | LocalRedirect {LANG}/create_ip_list.html \EOF
+\ S" http-proxy\ip-list" EvalRules 0= | LocalRedirect {LANG}/forbidden.html \EOF
+S" http-proxy\ip-list" EvalRules 0= | Disabled \EOF
+\ Всяким "тестерам открытых прокси" нужен именно жесткий ответ 5хх,
+\ т.к. редирект они могут воспринять, как позитивную обработку запроса.
+
+S" plugins\auth\OnRequest" EvalRules
+S" http-proxy\OnRequestPlugins" EvalRules

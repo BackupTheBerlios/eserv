@@ -1,0 +1,11 @@
+AuthMethod: AuthDomains
+
+LOGIN
+
+UID @ 0= | \EOF
+
+UserEmail IMAP[SpecialFolders] IsInFile | UserMailRoot: "{FIELD2 S@}" \EOF
+
+Domain Lists[LocalDomains] IsInFile 
+| UserMailRoot: "{FIELD3 S@}\{User}\INBOX" \EOF
+UserMailRoot: {Dirs[Mail]}\{Domain}\{User}\INBOX

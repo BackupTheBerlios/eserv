@@ -1,0 +1,6 @@
+\ Проверка существования получателя.
+
+RCPTTO GetUserFromEmail S" " SetUser
+EvalRules: UserExists
+| " 250 {RCPTTO} OK, my domain, user {User} exists{CRLF}" SetPrevUser SMTP_FPUTS TRUE \EOF
+" 550 {RCPTTO} no such user here{CRLF}" SetPrevUser RcptToError

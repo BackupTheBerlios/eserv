@@ -1,0 +1,32 @@
+Plugin activity_log
+
+Выдает среднюю скорость трафика каждого коннекта
+(за время от коннекта до дисконнекта к прокси-серверу)
+в лог-файл activity.log.
+Формат: UNIXDATE IP timeperiod_ms cps-in cps-out
+
+
+Установка и конфигурация.
+
+1. Расположить файлы плагина в каталоге conf\plugins\activity_log\
+
+2. Для загрузки плагина в conf\OnStartupPlugins.rules.txt добавить строку
+    Plugin: plugins\activity_log
+
+3. Для ведения лога в conf\OnDisconnect.rules.txt  добавить строку
+    ActivityLOG
+
+4. Для возможности дистанционного наблюдения лога добавить в conf\http-proxy\wwwroot\
+    файл activity.html
+
+5. Перезапустить Eproxy
+
+6. Для наблюдения вызвать http://eproxy:3130/activity.html
+   Некоторые браузеры, например Opera 5.0, не показывают контет сразу
+   после получения.  Таким браузерами невозможно пользоваться
+   для реализованной здесь схемы мониторинга.
+   Браузер Internet Explorer использовать возможно ;)
+
+_________________________________________________________
+
+09.Oct.2001 Tue 19:28  Ruvim Pinka  <ruvim@forth.org.ru>

@@ -1,0 +1,2 @@
+AUTH[NTdomain] SetNtServer
+User Pass LoginUserNT UID !

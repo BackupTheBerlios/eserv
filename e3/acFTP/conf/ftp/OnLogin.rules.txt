@@ -1,0 +1,14 @@
+SetWD: /
+
+User =~ anonymous | -1 UID ! MainCommands TO vWid \EOF
+User =~ ftp       | -1 UID ! MainCommands TO vWid \EOF
+
+IP NtoA FTP[VirtualServerIP] IsInFile 
+| FIELD3 NIP | FIELD3 SetDomain
+
+Domain NIP 0= | Server[DefaultDomain] SetDomain
+
+AuthMethod: AuthDomains
+LOGIN
+
+UID @ | PrivCommands TO vWid

@@ -1,0 +1,4 @@
+\ на входе S" имя группы" S" db_type" S" connect_string"
+SetField11 2OVER 2SWAP
+" {AUTH[AuthPlugins]}\auth_odbc\{s}\ismember.sql" STR@ EVAL-FILE
+FIELD11 IsInQueryResults

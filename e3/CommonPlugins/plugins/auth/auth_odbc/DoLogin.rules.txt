@@ -1,0 +1,2 @@
+2SWAP " {AUTH[AuthPlugins]}\auth_odbc\{s}\login.sql" STR@ EVAL-FILE 2SWAP
+LoginUserDB UID !

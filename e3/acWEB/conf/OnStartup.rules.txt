@@ -1,0 +1,21 @@
+( Загрузка Plugins )
+
+MaxThreads: {HTTP[MaxConnections]}
+
+HTTP[MemDebug] >NUM uMemDebug !
+
+S" LoadPlugins" EvalRules
+
+( Здесь указываются порты и интерфейсы, которые должен слушать
+  сервер. Если после номера порта не указан IP-адрес интерфейса,
+  то сервер будет слушать все интерфейсы на этом порту. Например:
+  Listen:
+  25 10.1.1.1
+  110
+  80
+)
+Listen:
+{HTTP[Port]} {HTTP[NetworkInterface]}
+{HTTP[AdminPort]} {HTTP[AdminNetworkInterface]}
+
+

@@ -1,0 +1,5 @@
+\ vDbDebug ON vFileDebug ON
+\ vDebugRules ON
+S" LocalLog"         EvalRules
+S" OnStartupPlugins" EvalRules
+S" ListenPorts"      EvalRules

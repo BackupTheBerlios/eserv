@@ -1,0 +1,2 @@
+User 2SWAP IsInFile
+| PassMD5= {FIELD2} | FIELD3 >NUM | TRUE UID !

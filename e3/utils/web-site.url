@@ -1,0 +1,6 @@
+[DEFAULT]
+BASEURL=http://localhost/
+
+[InternetShortcut]
+URL=http://localhost/
+Modified=401D6D778802BE018A

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml-stylesheet type="text/xsl" href="table.xsl" ?>
+<Trans>
+<DOMAIN>Домен</DOMAIN>
+<AUTH>Источник авторизации</AUTH>
+<SOURCE_NAME>Источник авторизации</SOURCE_NAME>
+<AUTH_TYPE>Способ авторизации</AUTH_TYPE>
+<DIRECTORY>Почтовый каталог</DIRECTORY>
+<ACCEPT_NEU>НСП</ACCEPT_NEU>
+<FORWARD_NEU>Переправлять НСП</FORWARD_NEU>
+<USERGROUP>Пользователь или группа (0 - любой)</USERGROUP>
+<ATIME>Время действия (0 - всегда)</ATIME>
+<RULE>Правило</RULE>
+
+<FNAME>Имя</FNAME>
+<LNAME>Фамилия</LNAME>
+<USER>Логин</USER>
+<PASS>Пароль (md5)</PASS>
+<GROUP>Состоит в группе</GROUP>
+<AUTH_PAR>Параметры метода авторизации</AUTH_PAR>
+<AUTH_OPT>Дополнительные параметры</AUTH_OPT>
+<MESSAGE_FILE>Файл с шаблоном сообщения</MESSAGE_FILE>
+
+<users.sql>Пользователи</users.sql>
+<AuthSources.txt>Источники авторизации (AuthSources.txt)</AuthSources.txt>
+<UserList.txt>Список пользователей для <a href="AuthSources.txt">метода авторизации auth_md5</a> (UserList.txt)</UserList.txt>
+<GroupsList.txt>Список групп для <a href="AuthSources.txt">метода авторизации auth_md5</a> (GroupsList.txt)</GroupsList.txt>
+<LocalDomains.txt>Локальные домены (LocalDomains.txt)</LocalDomains.txt>
+<IpBlackList.txt>Черный список IP (IpBlackList.txt)</IpBlackList.txt>
+<IpWhiteList.txt>Белый список IP (IpWhiteList.txt)</IpWhiteList.txt>
+<UrlBlackList.txt>Черный список URL (UrlBlackList.txt)</UrlBlackList.txt>
+<UrlWhiteList.txt>Белый список URL (UrlWhiteList.txt)</UrlWhiteList.txt>
+<HostBlackList.txt>Черный список хостов (HostBlackList.txt)</HostBlackList.txt>
+<HostWhiteList.txt>Белый список хостов (HostWhiteList.txt)</HostWhiteList.txt>
+<AutoReply.txt>Список автоответчиков (AutoReply.txt)</AutoReply.txt>
+<tcp.txt>Отображение TCP-портов - TCPMAP (tcp.txt)</tcp.txt>
+</Trans>

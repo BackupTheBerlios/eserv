@@ -1,0 +1,90 @@
+\ Вычисления этих правил должны вернуть TRUE, если добавить этого
+\ получателя (из команды RCPT TO), или FALSE, если не добавлять.
+
+720 LOG
+100 PAUSE \ обход глюков Outlook
+
+\ Разрешим максимум 20 получателей на письмо
+uRCPTN 1+! uRCPTN @ SMTP[MaxRcptNumber] >NUM > 
+| " 452 Too many recipients{CRLF}" RcptToError
+InboundMail
+
+\ Если получатель в черных или белых списках, то принимаем
+\ решение без дополнительных проверок.
+RCPTTO SMTP[ToEmailWhiteList] IsInFile
+| " 250 {RCPTTO} OK. {FIELD2}{CRLF}" SMTP_FPUTS TRUE \EOF
+
+RCPTTO SMTP[ToEmailBlackList] IsInFile
+RcptTo ~ spy@enemy.* OR \ просто пример явного задания email вне базы
+| " 550 {RCPTTO} is in my BlackList. {FIELD2}{CRLF}" RcptToError
+
+RCPTTO GetUserFromEmail SMTP[DenyLocalPartCharacters] CharsInSet | " 550 {RCPTTO} wrong local part ({uDeniedChar 1}){CRLF}" RcptToError
+
+SMTP[UseOrdbRbl] >FLAG | PeerIP IsOrdbBlockedRelay | " 451 You IP is blocked. See http://www.ORDB.org/lookup/?host={CLIENT}{CRLF}" RcptToError
+SMTP[UseMapsRbl] >FLAG | PeerIP IsMapsBlockedRelay | " 451 You IP is blocked by MAPS RBL. See http://mail-abuse.org/{CRLF}" RcptToError
+
+\ PeerIP S" sbl.spamhaus.org" IsRblBlocked | " 451 You IP is blocked. See http://www.spamhaus.org/sbl{CRLF}" RcptToError
+
+\ Алиас добавляет заданный в списке Email {FIELD2} вместо
+\ указанного в команде {RCPTTO} - явной командой AddRcpt.
+\ Поэтому возвращает он FALSE, чтобы {RCPTTO} не был добавлен в список получателей.
+\ В списке алиасов во втором поле (FIELD2) могут быть простейшие списки
+\ рассылки - несколько Email, разделенных запятыми, или запись вида
+\ "MaillistFile: имя_файла_списка". В файле списка первая строка - заголовки,
+\ в остальных строках в первом поле должен быть добавляемый Email.
+RCPTTO SMTP[ToEmailAliases] IsInFile
+| EvalRules: smtp\Alias \EOF
+
+\ Если получателем является робот, то его тоже принимаем
+RCPTTO SMTP[ToEmailRobots] IsInFile | " 250 {RCPTTO} OK, will be processed by robot. {FIELD5}{CRLF}" SMTP_FPUTS TRUE \EOF
+
+RCPTTO GetDomainFromEmail 2DUP SetDomain Lists[LocalDomains] IsInFile
+| EvalRules: smtp\LocalRcpt \EOF
+
+Server[DefaultDomain] Domain COMPARE-U 0=
+| EvalRules: smtp\LocalRcpt \EOF
+
+RcptTo ~ *@*.* 0= | " 550 {RCPTTO} need fully qualified domain{CRLF}" RcptToError
+
+\ Если MX какого-то домена указывает на наш IP, но в нашем
+\ списке локальных доменов его нет, то лучше все же принять эту
+\ почту в локальный ящик, а потом разобраться - у нас ошибка
+\ в настройке или владелец чужого домена ошибся IP при настройке
+\ своего DNS-сервера.
+SMTP[AcceptNotListedLocalDomains] >FLAG
+| RCPTTO GetDomainFromEmail IsMyMX | " 250 {RCPTTO} OK, my not-listed MX{CRLF}"  SMTP_FPUTS TRUE \EOF
+
+\ Аналогично для A-записей
+SMTP[AcceptNotListedLocalDomains] >FLAG
+| RCPTTO GetDomainFromEmail IsMyHostname | " 250 {RCPTTO} OK, my not-listed HOST{CRLF}"  SMTP_FPUTS TRUE \EOF
+
+\ Если дошли до сюда, значит получатель не попал в черные и белые
+\ списки, а также не перечислен в алиасах, и не принадлежит локальным
+\ доменам. Значит письмо предназначено для отправки наружу.
+\ Эту отправку мы можем разрешить только нашим локальным пользователям,
+\ что и собираемся проверить - по IP или по авторизации по паролю.
+\ Если пользователь авторизовался по AUTH, то мы его авторизовали в
+\ OnLogin.rules.txt. Либо мы назначили имя по IP-авторизации в
+\ OnThreadConnect.rules.txt. Если эта авторизация успешна, то UID<>0
+\ и имя пользователя в переменной User.
+
+OutboundMail
+
+\ UID @ | RCPTTO GetDomainFromEmail DnsDomainExists | " 250 {RCPTTO} OK, auth:{User}{CRLF}" SMTP_FPUTS TRUE \EOF
+\ UID @ | RCPTTO GetDomainFromEmail DnsDomainExists 0= | " 450 {RCPTTO} Bad domain (not found in DNS){CRLF}" SMTP_FPUTS FALSE \EOF
+
+SMTP[RequireAuthForOutboundMail] >FLAG
+| LoggedAs: "{MAILFROM GetUserFromEmail}" 0= | " 530 {MAILFROM} authorization required!!{CRLF}" RcptToError
+
+UID @ \ авторизованная сессия (по IP или AUTH), если UID<>0
+[IF]
+  SMTP[VerifyDomainsInDns] >FLAG
+  [IF]
+    RCPTTO GetDomainFromEmail DnsDomainExists
+    [IF] " 250 {RCPTTO} OK, auth:{User}, domain exists.{CRLF}" SMTP_FPUTS TRUE \EOF
+    [ELSE] " 450 {RCPTTO} Bad domain (not found in DNS){CRLF}" RcptToError [THEN]
+  [ELSE] " 250 {RCPTTO} OK, auth:{User}{CRLF}" SMTP_FPUTS TRUE \EOF [THEN]
+[THEN]
+
+\ а спамеру не повезло...
+( Tarpit) " 550 we do not relay (your IP={CLIENT} logged){CRLF}" RcptToError

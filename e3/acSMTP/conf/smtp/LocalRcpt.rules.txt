@@ -1,0 +1,35 @@
+\ Если AcceptNonExistentUsers=0, то имя пользователя в Email слева от @
+\ сверяется со списком пользователей в этом домене, и команда RCPTTO
+\ выдает ошибку "5xx такого пользователя нет" во время сессии, если
+\ пользователя в домене нет
+
+SMTP[AcceptNonExistentUsers] >FLAG 0=
+| EvalRules: smtp\VerifyRcptExist \EOF
+
+\ Если AcceptNonExistentUsers=1, то почта принимается для NEU, но только 
+\ в случае, если в свойствах домена в LocalDomains поле ACCEPT_NEU тоже =1.
+
+FIELD4 ( ACCEPT_NEU ) >FLAG 0=
+| EvalRules: smtp\VerifyRcptExist \EOF
+
+\ Сюда пришли, если оба флага =1, т.е. принимаем почту несуществующего
+\ пользователя в этом домене. Осталось решить, создавать ему ящик или
+\ переправлять на другой Email.
+
+SMTP[CreateNonExistentUsersBoxes] >FLAG
+| " 250 {RCPTTO} OK, my domain, user box{CRLF}" SMTP_FPUTS TRUE \EOF
+
+\ Сюда пришли, если переправлять почту на заданный адрес.
+\ Задан в свойствах домена, либо, если он пустой, общий для всех доменов из ini.
+
+RCPTTO GetUserFromEmail S" " SetUser
+EvalRules: UserExists | " 250 {RCPTTO} OK, my domain, user {User} exists{CRLF}" SetPrevUser SMTP_FPUTS TRUE \EOF
+SetPrevUser
+
+FIELD5 ( FORWARD_NEU) NIP 0<>
+| FIELD5 AddRcpt " 250 {RCPTTO} OK, my domain, fwd={FIELD5}{CRLF}" SMTP_FPUTS FALSE \EOF
+
+\ В свойствах домена адрес был пустой.
+
+SMTP[ForwardNonExistentUsersTo] AddRcpt
+" 250 {RCPTTO} OK, my domain, fwd={SMTP[ForwardNonExistentUsersTo]}{CRLF}" SMTP_FPUTS FALSE

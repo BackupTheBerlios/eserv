@@ -1,0 +1,4 @@
+OnRequest.rules.txt_ проверка на IsLocalWebRequest
+users_quota_permits.list.txt "User name Can Canal1 Canal2 ... CanalN" - какие каналы можно смотреть юзеру
+Quotas.list.txt "name limit_volume bytes period seconds"  - список, обрабатывается скриптами
+Bands.list.txt "name  cps"  - список, обрабатывается скриптами

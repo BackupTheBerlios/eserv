@@ -1,0 +1,11 @@
+\ " 502 Error: command not implemented{CRLF}" SMTP_FPUTS
+\ " 214 Eserv home page: http://www.etype.net/eserv/{CRLF}" SMTP_FPUTS
+
+" 214- This is Eserv version 3.{ABUILD} (see www.etype.net)
+214- Commands:
+214- HELO    EHLO    MAIL    RCPT    DATA
+214- RSET    NOOP    QUIT    HELP    VRFY
+214- EXPN    VERB    ETRN    DSN     AUTH
+214- To report bugs in the implementation send email to support@eserv.ru
+214 End of HELP info
+" SMTP_FPUTS

@@ -1,0 +1,7 @@
+DocumentRoot: {HTTP[AdminDocumentRoot]}
+
+Uri /conf/*    | DocumentRoot: ..\Eproxy
+Uri /cgi-bin/* | DocumentRoot: ..\Estat
+Uri /estat/*   | DocumentRoot: ..\Estat
+Uri /elog/*    | DocumentRoot: ..\Elog    Replace /
+Uri /main/*    | DocumentRoot: ..\        Replace /

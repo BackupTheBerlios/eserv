@@ -1,0 +1,4 @@
+Band: Test 1000 =CPS ;Band
+Band: R_500 500 =CPS ;Band
+Band: R_1000 1000 =CPS ;Band
+Band: R_2000 2000 =CPS ;Band

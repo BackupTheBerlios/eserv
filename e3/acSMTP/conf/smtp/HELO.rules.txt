@@ -1,0 +1,6 @@
+705 LOG
+
+INCOMINGHOST GetHostIP DUP | NIP DUP 790 LOG
+                        0= | PeerIP <> | 791 LOG
+
+S" conf\smtp\HELO.pat.txt" EVAL-FILE

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+
+<window id="example-window" title="Eserv Control Menu" 
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        {xul}
+        oncommand="open('http://localhost:3140'+event.target.value); return false;">
+<toolbox flex="1">
+
+<menubar>
+<menu label="Общие параметры">
+  <menupopup>
+
+    <menu id="auth1" label="Авторизация" value="/conf/plugins/auth/{LANG}/docs.html">
+      <menupopup>
+         <menuitem value="/main/1/{Lists[LocalDomains] 2DUP \>/}" label="Локальные домены"/>
+         <menuitem value="/main/1/{AUTH[AuthSources] 2DUP \>/}" label="Источники авторизации"/>
+         <menuitem value="/main/1/{AUTH[UserList] 2DUP \>/}" label="Список пользователей auth_md5"/>
+         <menuitem value="/main/1/{AUTH[GroupList] 2DUP \>/}" label="Список групп auth_md5"/>
+         <menuitem value="/main/1/{Lists[LocalNetworks] 2DUP \>/}" label="Локальные сети"/>
+         <menuitem value="/main/script/fs/scripts/uc/" label="Конвертация пользователей из Eserv.ini (Eserv/2) в MD5 file"/>
+      </menupopup>
+    </menu>
+
+    <menu id="srv" label="Службы (сервисы) WinNT" value="/">
+      <menupopup>
+         <menuitem value="/{LANG}/install.html?service=acSMTP" label="Установить службу acSMTP"/>
+         <menuitem value="/{LANG}/uninstall.html?service=acSMTP" label="Удалить службу acSMTP"/>
+         <menuitem value="/{LANG}/install.html?service=acIMAP" label="Установить службу acIMAP"/>
+         <menuitem value="/{LANG}/uninstall.html?service=acIMAP" label="Удалить службу acIMAP"/>
+         <menuitem value="/{LANG}/install.html?service=acFTP" label="Установить службу acFTP"/>
+         <menuitem value="/{LANG}/uninstall.html?service=acFTP" label="Удалить службу acFTP"/>
+         <menuitem value="/{LANG}/install.html?service=eproxy" label="Установить службу Eproxy"/>
+         <menuitem value="/{LANG}/uninstall.html?service=eproxy" label="Удалить службу Eproxy"/>
+      </menupopup>
+    </menu>
+
+    <menu id="plg" label="Расширения (plugins)" value="/">
+      <menupopup>
+         <menuitem value="/list.html" label="Полный список установленных расширений"/>
+      </menupopup>
+    </menu>
+
+    <menu id="ini" label="Опции Eserv3.ini" value="/main/script/fs/ini.ini?">
+      <menupopup>
+         <menuitem value="/main/script/fs/ini.ini?" label="Просмотр и редактирование опций"/>
+      </menupopup>
+    </menu>
+
+    <menu id="stat" label="Статистика" value="/">
+      <menupopup>
+         <menuitem value="/mailstat/mailstat.xml" label="Статистика SMTP-сервера"/>
+         <menuitem value="/trafficstat/trafficstat.xml" label="Статистика трафика"/>
+         <menuitem value="/estat/" label="Estat (C) EPE Labs"/>
+         <menuitem value="/elog/elog.cgi" label="Elog (C) LANK"/>
+         <menuitem value="/conf/ru/stat.html" label="Другие статистические программы"/>
+      </menupopup>
+    </menu>
+
+  </menupopup>
+</menu>
+
+<menu label="Параметры почтового сервера">
+  <menupopup>
+
+    <menu id="smtp1" label="Управление доступом" value="/">
+      <menupopup>
+         <menuitem value="/main/1/{SMTP[IpBlackList] 2DUP \>/}" label="Черный список IP"/>
+         <menuitem value="/main/1/{SMTP[IpWhiteList] 2DUP \>/}" label="Белый список IP"/>
+         <menuitem value="/main/1/{SMTP[FromEmailBlackList] 2DUP \>/}" label="Черный список Email отправителей"/>
+         <menuitem value="/main/1/{SMTP[FromEmailWhiteList] 2DUP \>/}" label="Белый список Email отправителей"/>
+         <menuitem value="/main/1/{SMTP[ToEmailBlackList] 2DUP \>/}" label="Черный список Email получателей"/>
+         <menuitem value="/main/1/{SMTP[ToEmailWhiteList] 2DUP \>/}" label="Белый список Email получателей"/>
+         <menuitem value="/main/1/{SMTP[FromEmailNeedAuthList] 2DUP \>/}" label="Email, требующие SMTP-авторизации"/>
+      </menupopup>
+    </menu>
+
+    <menu id="smtp2" label="Маршрутизация" value="/">
+      <menupopup>
+         <menuitem value="/main/1/{SMTP[ToEmailAliases] 2DUP \>/}" label="Псевдонимы (alias'ы) и списки рассылки"/>
+         <menuitem value="/main/1/{SMTP[RestrictedAliases] 2DUP \>/}" label="Ограничения на отправку alias'ам и спискам рассылки"/>
+         <menuitem value="/main/1/{SMTP[EmailSmtpForward] 2DUP \>/}" label="Пересылка на другой SMTP-сервер"/>
+         <menuitem value="/main/1/{SMTP[SubjectWords] 2DUP \>/}" label="Пересылка при наличии заданных слов в теме"/>
+      </menupopup>
+    </menu>
+
+    <menu id="smtpout" label="Доставка исходящей почты" value="/">
+      <menupopup>
+         <menuitem value="/main/1/{SMTP[Out] 2DUP \>/}/" label="Очередь исходящих сообщений"/>
+         <menuitem value="/smtpsend/" label="Запустить обработку очереди"/>
+      </menupopup>
+    </menu>
+
+    <menu id="smtp3" label="Pop3->Smtp" value="/">
+      <menupopup>
+         <menuitem value="/main/1/{Pop2smtp[Boxes] 2DUP \>/}" label="Получать почту из внешних POP3-ящиков"/>
+      </menupopup>
+    </menu>
+
+    <menu id="smtp4" label="Фильтры содержания" value="/">
+      <menupopup>
+         <menuitem value="/main/1/{SMTP[BlackListSubject] 2DUP \>/}" label="Черный список тем"/>
+         <menuitem value="/main/1/{SMTP[BlackListContentType] 2DUP \>/}" label="Черный список Content-Type"/>
+      </menupopup>
+    </menu>
+
+    <menu id="smtp5" label="Автоответчики" value="/">
+      <menupopup>
+         <menuitem value="/main/1/{SMTP[AutoReply] 2DUP \>/}" label="Активные автоответчики"/>
+         <menuitem value="/main/1/{SMTP[NoAutoReplyTo] 2DUP \>/}" label="Не отвечать отправителям..."/>
+      </menupopup>
+    </menu>
+
+    <menu id="smtp_antispam" label="Антиспам PopFile" value="/main/acSMTP/conf/smtp/plugins/popfile/{LANG}/docs.html">
+      <menupopup>
+         <menuitem value="/main/1/{AntispamPopFile[PopFileIpWhiteList]] 2DUP \>/}" label="Белый список IP"/>
+         <menuitem value="/main/1/{AntispamPopFile[PopFileFromWhiteList] 2DUP \>/}" label="Белый список Email"/>
+      </menupopup>
+    </menu>
+
+    <menu id="smtp_robots" label="Почтовые роботы" value="/main/acSMTP/conf/smtp/plugins/robots/{LANG}/docs.html">
+      <menupopup>
+         <menuitem value="/main/1/{SMTP[ToEmailRobots]] 2DUP \>/}" label="Настройка роботов"/>
+      </menupopup>
+    </menu>
+
+  </menupopup>
+</menu>
+
+<menu label="Параметры прокси сервера">
+  <menupopup>
+
+    <menu id="conf" label="Основные параметры" value="/conf/ru/docs.html">
+      <menupopup>
+         <menuitem value="/conf/ru/ListenPorts.html" label="Порты и интерфейсы..."/>
+         <menuitem value="/conf/ru/plugins.html" label="Расширения..."/>
+         <menuitem value="/conf/ru/stat.html" label="Статистика..."/>
+      </menupopup>
+    </menu>
+
+    <menu id="http_proxy_plugins_acl" label="Управление доступом (ACL)" value="/conf/http-proxy/plugins/acl/ru/docs.html">
+      <menupopup>
+         <menuitem value="/main/2/{Proxy[HostBlackList] 2DUP \>/}" label="Черный список хостов"/>
+         <menuitem value="/main/2/{Proxy[HostWhiteList] 2DUP \>/}" label="Белый список хостов"/>
+         <menuitem value="/main/2/{Proxy[UrlBlackList] 2DUP \>/}" label="Черный список URL"/>
+         <menuitem value="/main/2/{Proxy[UrlWhiteList] 2DUP \>/}" label="Белый список URL"/>
+      </menupopup>
+    </menu>
+
+    <menu id="http_proxy_plugins_TrafC" label="Управление трафиком" value="/conf/http-proxy/plugins/TrafC/ru/menu/docs.html">
+      <menupopup>
+         <menuitem value="/conf/http-proxy/plugins/TrafC/ru/menu/bands_list.html" label="Bands..."/>
+         <menuitem value="/conf/http-proxy/plugins/TrafC/ru/menu/quotas_list.html" label="Quotas..."/>
+         <menuitem value="/conf/http-proxy/plugins/TrafC/ru/menu/rules_list.html" label="Правила..."/>
+         <menuitem value="/conf/http-proxy/plugins/TrafC/ru/menu/stat.html" label="Статистика..."/>
+      </menupopup>
+    </menu>
+
+    <menu id="tcpmap" label="Отображение TCP портов" value="/">
+      <menupopup>
+         <menuitem value="/main/1/{PROXY[TcpMap] 2DUP \>/}" label="Настроить TCPMAP"/>
+      </menupopup>
+    </menu>
+
+
+  </menupopup>
+</menu>
+</menubar>
+
+</toolbox>
+
+</window>

@@ -1,0 +1,46 @@
+{
+ S" ..\scripts\lib.f" INCLUDED S" "
+}
+<h2>Управление списками пользователей и групп</h2>
+<font color=red>
+{S" action" IsSet 
+[IF] S" action" EVALUATE ALSO ACTIONS EVALUATE PREVIOUS
+[ELSE] S" " [THEN]
+}</font>
+<hr>
+<h3>"{AUTH-SOURCE}" {AUTH-TYPE} {AUTH-PARAMS}</h3>
+<form action={script_name}>
+<input type=hidden name=action value=update>
+<table border=0 width=100%><tr><td>
+
+<table border=1 class=small>
+<tr><th>on/off</th><th>Пользователь</th><th>Состоит в группах</th></tr>
+{ShowUsers}
+</table>
+<p>
+
+</td><td align=center valign=top>
+
+Группы пользователей: <select name=group>
+{ListGroups}
+</select>
+<hr><p class=small align=left>
+<input type=radio name=action2 value=add_to_group checked>Добавить отмеченных пользователей в выбранную группу<br>
+<input type=radio name=action2 value=remove_from_group>Удалить отмеченных пользователей из выбранной группы<br>
+<input type=radio name=action2 value=del_users>Удалить отмеченные учетные записи пользователей<br>
+<input type=radio name=action2 value=del_group>Удалить выбранную группу<br>
+<hr><p class=small align=left>
+<input type=radio name=action2 value=add_user>Создать учетную запись пользователя:<br>
+Имя: <input type=text name=username> Пароль: <input type=text name=password>
+
+<input type=radio name=action2 value=add_group>Создать группу:<br>
+Имя: <input type=text name=groupname>
+<hr>
+<p><input type=submit value=Выполнить>
+
+</td></tr></table>
+<p>
+</form>
+<p>
+<hr>
+</form>

@@ -1,0 +1,1 @@
+S" RUN-CONSOLE" $MAIN S!

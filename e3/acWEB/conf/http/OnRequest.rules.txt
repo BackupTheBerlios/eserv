@@ -1,0 +1,132 @@
+( $Id: OnRequest.rules.txt,v 1.1 2003/12/28 16:27:06 spf Exp $
+  DocumentRoot задает каталог, файлы из которого будут выдаватьс€
+  веб-сервером в том случае, если иные каталоги не были заданы настройкой
+  виртуальных серверов.
+  ѕуть в DocumentRoot задаетс€ абсолютный, например D:\IntetPub,
+  \\computer\share\path или относительно каталога веб-сервера,
+  как wwwroot в настройке по умолчанию.
+)
+
+\ uCgiDebug ON
+
+DocumentRoot: {HTTP[DocumentRoot]}
+
+BitrixSitemanager[UseSM] >NUM | DocumentRoot: {BitrixSitemanager[DocumentRoot]}
+
+Uri /MailClassify/* | DocumentRoot: ..\acSMTP\conf\smtp\plugins\popfile\web Replace /
+Uri *XXXXXXXXXXXXXXXXXXXXXX* | Forbidden \EOF
+
+\ Port= 80 | DocumentRoot: wwwroot
+
+Port= {Http[AdminPort]} | EvalRules: http\AdminOnRequest1
+Uri /my/* | EvalRules: http\MyOnRequest1
+
+HTTP[Active] >NUM 0= | DocumentRoot: {HTTP[DocumentRoot]}\tempdown
+
+DirectoryNotfound: index.php
+
+( DirectoryIndex задает последовательность поиска индексных файлов в
+  каталоге дл€ случа€, когда им€ файла не задано, а задан только каталог.
+)
+DirectoryIndex: index.f index.html index.htm index.php3 index.php index.cgi default.htm
+
+\ FILENAME TYPE CR
+( ѕримеры назначени€ других корневых каталогов в зависимости от
+  значений заголовков HTTP-запроса. 
+)
+\ Host: ~ ac* | DocumentRoot: ac\wwwroot
+\ Accept-Language: ~ *ru* | DocumentRoot: ac\wwwroot\ru
+\ Host: ~ * | DocumentRoot: c:\eserv2\wwwroot
+\ Uri /admin/* | DocumentRoot: c:\eserv2\wwwroot
+\ CR Cookie: STR@ TYPE CR
+\ Uri /phpmyadmin* | VirtualRoot: C:\PRO\my-web\phpmyadmin\
+\ Uri /progs/* | Replace /download/
+\ Uri /download/* | Redirect http://www.nncron.ru{URI}
+
+( —пособ авторизации - им€ файла или слова, реализующего вариант обработки
+  запроса LoginUser
+)
+\ AuthMethod: AuthFile
+\ AuthMethod: NtLogon
+\ AuthMethod: AuthDomainsDebug
+\ LOGIN
+\ User =~ admin | Pass =~ admin_pass | TRUE UID !
+
+User NIP
+[IF]
+  Port= {Http[AdminPort]} Uri /my/* 0= AND
+  [IF]
+    Http[AdminUser] NIP 0= Http[AdminPass] NIP 0= OR
+    [IF] TRUE UID ! DocumentRoot: {HTTP[AdminDocumentRoot]}\setpass DirectoryIndex: index.f
+    [ELSE] Http[AdminPass] NIP 32 <> | Http[AdminPass] MD5 S" Http[AdminPass]" IniS!
+           User= {Http[AdminUser]} PassMD5= {Http[AdminPass]} AND UID !
+           UID @ 0= | TRUE UID ! DocumentRoot: {HTTP[AdminDocumentRoot]}\wrongpass DirectoryIndex: index.f
+    [THEN]
+  [ELSE]
+    AuthMethod: AuthDomains
+    LOGIN
+  [THEN]
+[THEN]
+
+( Ќазначение выдаваемого сервером пол€ Content-Type в зависимости от
+  расширени€ файла.
+)
+File *.gif   | ContentType image/gif
+File *.css   | ContentType text/css
+File *.html  | ContentType text/html
+File *.htm   | ContentType text/html
+File *.shtml | ContentType text/html
+File *.xml   | ContentType text/xml
+File *.xsl   | ContentType text/xml
+File *.xul   | ContentType text/xml
+File *.txt   | ContentType text/plain
+File *.jpg   | ContentType image/jpeg
+File *.zip   | ContentType application/zip
+File *.rar   | ContentType application/x-compressed
+File *.log   | ContentType text/plain
+File *.key   | ContentType application/octet-stream
+File *.exe   | ContentType application/octet-stream
+File *.doc   | ContentType application/octet-stream
+File *.hta   | ConetntType application/hta
+
+( Ќазначение действий, производимых сервером дл€ файлов
+  с заданными расширени€ми.
+)
+\ File *.spf  | Cgi c:\spf\spf375.exe
+File *.php  | Cgi {HTTP[PhpBin]}
+File *.php3 | Cgi {HTTP[PhpBin]}
+File *.pl   | Cgi {HTTP[PerlBin]}
+File *.cgi  | Cgi {HTTP[PerlBin]}
+File *.py   | Cgi c:\pyton20\python.exe
+\ File *.vbs  | Cgi CScript.exe //NoLogo
+\ File *.js   | Cgi CScript.exe //NoLogo
+File *fs.exe  | Cgi
+File *estat32.exe  | Cgi
+Port= {Http[AdminPort]} | File *.html | Uri /cgi-bin/* 0= | Uri /estat/* 0= | Cgi ..\script\fs\fs.exe
+File *.f    | Cgi ..\script\fs\fs.exe
+File *.xml  | Cgi ..\script\fs\fs.exe
+File *.xsl  | Cgi ..\script\fs\fs.exe
+File *.txt  | Port= {Http[AdminPort]} | Cgi ..\script\fs\fs.exe
+File *.ini  | Port= {Http[AdminPort]} | Cgi ..\script\fs\fs.exe
+
+\ CGI-HANDLER TYPE CR ScriptFile TYPE CR Post? @ . CR
+
+
+( ≈сли Uri в запросе не заканчиваетс€ на "/", но соответсвующий
+  ресурс на сервере €вл€етс€ не файлом, а каталогом - производитс€
+  редирект на Uri с "/" в конце. Ёто необходимо дл€ правильной
+  обработки ссылок браузером.
+)
+FILENAME IsDirectory  FILENAME + 1- C@ CHAR \ <> AND | Redirect {URI}/
+
+Port= {Http[AdminPort]} | EvalRules: http\AdminOnRequest2
+Uri /my/* | EvalRules: http\MyOnRequest2
+
+\ Port= {Http[AdminPort]} 0= | Uri /admin/* | UID @ 0= | Unauthorized "Web Admin"
+
+
+( Ѕазова€ проверка прав доступа. Ѕезусловное закрытие Uri,
+  содержащих ".." дл€ предотвращени€ выхода на вышележащие каталоги
+)
+Uri *..*                   | Forbidden
+Uri *::$*                  | Forbidden

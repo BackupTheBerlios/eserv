@@ -1,0 +1,6 @@
+\ Скопировать файл письма и запустить доставку.
+CopyFileWithCurrentRcptTo: "{SMTP[Out]}\{FIELD2}\{FIELD3}\{MAILFROM}!{RANDOM-ID}.eml"
+
+EvalRules: smtp\delivery\RunSendMailAppForward
+
+RCPTTO DelRcpt

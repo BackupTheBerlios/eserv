@@ -1,0 +1,4 @@
+\EOF
+TRUE  | +CanalIn` Bqqq +CanalIn` Q1
+TRUE  | +CanalIn` Bccc   
+TRUE  | +CanalIn` Qtest1   

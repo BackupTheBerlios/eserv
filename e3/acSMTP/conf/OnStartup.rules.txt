@@ -1,0 +1,12 @@
+( Загрузка Plugins )
+
+\ DnsDebug ON
+
+
+MaxThreads: {SMTP[MaxConnections]}
+
+S" OnStartupPlugins" EvalRules
+
+Listen:
+{SMTP[Port]} {SMTP[NetworkInterface]}
+

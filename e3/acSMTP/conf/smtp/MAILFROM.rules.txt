@@ -1,0 +1,65 @@
+( ¬ычислени€ в этом файле должны возвратить флаг true/false,
+  в зависимости от политики дл€ данного Email. TRUE=прин€ть. )
+
+710 LOG
+100 PAUSE \ обход глюков Outlook
+uRCPTN 0! \ потом будем считать к-во RCPTTO
+\ : MailFromError DUP STR@ SetMailFromError Tarpit SMTP_FPUTS FALSE \EOF ;
+
+uMCNT 1+! uMCNT @ SMTP[MaxMsgsNumber] >NUM > | " 452 Too many mails per session{CRLF}" MailFromError
+
+\ пустой MAIL FROM:<> по стандарту должен приниматьс€ дл€ сообщений об ошибках
+MAILFROM NIP 0= | " 250 OK{CRLF}" SMTP_FPUTS TRUE \EOF
+
+MAILFROM SMTP[FromEmailWhiteList] IsInFile
+| " 250 {MAILFROM} OK. {FIELD2}{CRLF}" SMTP_FPUTS TRUE \EOF
+
+MAILFROM SMTP[FromEmailBlackList] IsInFile
+MailFrom ~ very.bad@spammer.* OR \ просто пример €вного задани€ email вне базы
+| " 550 {MAILFROM} is in my BlackList. {FIELD2}{CRLF}" MailFromError
+
+MAILFROM GetUserFromEmail SMTP[DenyLocalPartCharacters] CharsInSet | " 550 {MAILFROM} wrong local part ({uDeniedChar 1}){CRLF}" MailFromError
+
+SMTP[RequireAuthForAllMail] >FLAG 
+| LoggedAs: "{MAILFROM GetUserFromEmail}" 0= | " 530 {MAILFROM} authorization required!{CRLF}" MailFromError
+
+MAILFROM SMTP[FromEmailNeedAuthList] IsInFile LoggedAs: {FIELD2} 0= AND
+| " 530 {MAILFROM} authorization required {FIELD3}{CRLF}" MailFromError
+
+
+\ неполным представл€етс€ fetchmail, если минимально настроен...
+\ MailFrom ~ *@localhost MailFrom ~ FETCHMAIL-DAEMON@* OR | PeerIP= 127.0.0.1 | " 250 OK{CRLF}" SMTP_FPUTS TRUE \EOF
+
+\ проверка присутстви€ специального агента-отправител€
+MAILFROM CLIENT SMTP[SpecialSenders] IsInFile2 | " 250 {MAILFROM} OK{CRLF}" SMTP_FPUTS TRUE \EOF
+
+MailFrom ~ *@*.* 0= | " 550 {MAILFROM} need fully qualified domain{CRLF}" MailFromError
+
+MAILFROM GetDomainFromEmail Lists[LocalDomains] IsInFile
+| " 250 {MAILFROM} OK, my domain{CRLF}" SMTP_FPUTS TRUE \EOF
+
+\ ѕроверка адреса отправител€ по DNS.
+\ ≈сли домен отправител€ не существует или имеет неверные MX,
+\ то выдадим сообщение об ошибке. ¬се сообщени€ об ошибках MAILFROM
+\ будут автоматически повторены на этапе RCPT, т.к. некоторые программы 
+\ не понимают отказ в команде MAIL (или используют pipelining) и 
+\ продолжают отправку сообщени€.
+
+MAILFROM NIP   SMTP[VerifyDomainsInDns] >FLAG 0<>  AND
+[IF] \ адрес отправител€ не пустой
+  MAILFROM GetDomainFromEmail DnsDomainExists
+  [IF] \ домен существует (или невозможно проверить)
+    \ MX некоторых доменов настроены неверно - указывают на localhost вместо
+    \ реального внешнего IP. –абота с такими адресами обычно приводит к зацикливанию
+    \ почты, поэтому откажемс€ принимать такие письма. “ем более, что нередко така€
+    \ настройка DNS - намеренный спамерский трюк (чтобы не получать возвратов почты).
+    MAILFROM GetDomainFromEmail IsLocalhostMX
+    | " 550 {MAILFROM} Wrong MX (point to localhost){CRLF}" MailFromError
+  [ELSE]
+      " 450 {MAILFROM} domain not exist{CRLF}" MailFromError
+  [THEN]
+[THEN]
+\ —юда пришли, если адрес отправител€ пустой,
+\ или домен существует, и MX этого домена не localhost
+
+" 250 {MAILFROM} OK{CRLF}" SMTP_FPUTS TRUE

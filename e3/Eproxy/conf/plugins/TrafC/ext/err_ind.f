@@ -1,0 +1,8 @@
+\ 16.Oct.2002 Wed 20:15
+
+' PROCESS-ERR BEHAVIOR ' NOOP = [IF]
+
+: EEE CURFILE @ ?DUP IF ASCIIZ> TYPE THEN ." :" CURSTR @ . ." :" >IN @ . CR ;
+: _E  DUP IF ." ERR " DUP . CR EEE THEN ;
+
+' _E TO PROCESS-ERR             [THEN]

@@ -1,0 +1,10 @@
+conf\http-proxy\plugins\black_list\activate.f
+uBlackList @ 0= | \EOF
+BlockUrl: *porno* * TimeInterval: 8:00-18:00
+BlockHost: b2b-js.flycast.com
+BlockUrl: *readme.eml
+BlockHost: www.fastmoneyforfree.com * PeerIP= 10.1.1.20
+BlockUrl: http://www.aport.ru/*.swf  
+BlockUrl: http://web.icq.com/client/ate*  
+BlockUrl: http://svcs.microsoft.com/svcs/mms/ad*
+BlockHost: *playboy* * PeerIP= 10.1.1.20

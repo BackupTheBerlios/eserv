@@ -1,0 +1,4 @@
+\ AuthSource: "Proxy Access NT" auth_nt ac
+AuthSource: "Proxy Access NT" auth_nt 
+\ AuthSource: "Proxy Access MySQL" auth_mysql server name pass
+\ AuthSource: "Proxy Access Eserv2" auth_e2 c:\eserv2\conf\Eserv.ini

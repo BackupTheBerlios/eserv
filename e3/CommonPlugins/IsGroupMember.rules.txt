@@ -1,0 +1,21 @@
+\ ѕроверка членства пользовател€ в группе.
+\ »м€ группы на входе этого скрипта (не в переменной).
+\ ( uncomment to debug) 2DUP TYPE CR Domain TYPE CR User TYPE CR
+
+UID @ 0= | 2DROP FALSE \EOF
+
+\ ≈сли текущий домен не указан в списке локальных доменов,
+\ то провер€ем по методу авторизации по умолчанию.
+Domain Lists[LocalDomains] IsInFile 0= | EvalRules: {AUTH[AuthMethod]}Member \EOF
+
+\ ≈сли домен есть в списке локальных доменов,
+\ но указанного источника авторизации нет в списке источников,
+\ то примен€ем AuthMethod без параметров.
+FIELD2 " {s}" STR@ AUTH[AuthSources] IsInFile 0=
+| EvalRules: {AUTH[AuthMethod]}Member \EOF
+
+\ ≈сли домен есть в списке локальных доменов,
+\ и указанный источник авторизации есть в списке источников,
+\ то провер€ем принадлежность группе в этом источнике с его параметрами.
+FIELD4 S@ DUP 0= | 2DROP
+FIELD3 S@ " {AUTH[AuthPlugins]}\{FIELD2}\IsMember.rules.txt" STR@ INCLUDED

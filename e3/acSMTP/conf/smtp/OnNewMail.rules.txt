@@ -1,0 +1,32 @@
+( Этот обработчик выполняется после приема письма, обработки всех
+  фильтров OnMessageEnd, выдачи ответа отправителю.
+  Задача - доставка принятой почты - запуск обработчика OnDelivery
+  для каждого получателя письма.
+  Для локальных получателей производится непосредственно доставка
+  в их каталоги-ящики, а для внешних адресатов - в SMTP[Out] и
+  запуск процесса отправки наружу.
+)
+
+\ Если был заголовок Return-Receipt-To во входящем сообщении,
+\ то возвращаем отправителю подтверждение о получении письма
+H-RETURN-RECEIPT-TO NIP IsInboundMail AND
+SMTP[SendReturnReceipts] >FLAG AND
+| " {SMTP[Templates]}\ReturnReceipt.pat" STR@ " {SMTP[Out]}\{RCPTTO}!{RANDOM-ID}.eml" STR@ EVAL-FILE-TO
+
+\ Особые случаи доставки обрабатывем в conf\smtp\Delivery.rules.txt
+\ вычисляемом для каждого получателя. Список получателей заполнялся
+\ во время приема адресов получателей и вычисления правил AddRcpt 
+\ в правилах conf\smtp\RCPTTO.rules.txt
+
+TossFile
+
+\ Если список получателей на данный момент не пуст,
+\ значит остались еще внешние получатели. Подготовим файл на отправку:
+
+RcptListIsNotEmpty DUP | CopyFileWithRcptsTo: {SMTP[Out]}\{MAILFROM}!{RANDOM-ID}.eml
+
+\ Отправляем полученное письмо
+
+                       | EvalRules: smtp\delivery\SendMail
+
+uCOPY-CNT @ | DeleteCurrentFile

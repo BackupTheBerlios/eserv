@@ -1,0 +1,2 @@
+IsMember
+( должен быть подключен plugin groups_e2 )

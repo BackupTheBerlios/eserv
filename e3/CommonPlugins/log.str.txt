@@ -1,0 +1,97 @@
+100   <25>TCPD, Error {n} in the rule file "{s}", line: {n}, char: {n}
+101   <25>TCPD, The process {ProgName @ COUNT} is already running. Err: {n}
+102   <25>TCPD, Unable to create thread: {n}
+103   <25>TCPD, $Id: log.str.txt,v 1.1 2003/12/28 16:27:09 spf Exp $
+110   <31>TCPD, Debug dump: {n}
+120   <31>TCPD, Debug dump: {s}
+121   <31>TCPD, IN: {s}
+122   <31>TCPD, OUT: {s}
+200   <29>TCPD, Connection from: {s}:{n}
+201   <29>TCPD, Closing connection
+210   <30>TCPD, Request from: {s}:{n}
+210   *daily*<30>TCPD, Request from: {s}:{n}
+220   <29>TCPD, Exit thread: {n}
+230   <29>TCPD, Exit thread: {n}, depth: {n}
+240   <31>TCPD, Service installed OK
+241   <31>TCPD, Service install FAILED: {n}
+242   <31>TCPD, Service uninstalled OK
+243   <31>TCPD, Service uninstall FAILED: {n}
+244   <30>TCPD, Service stopped
+300   <27>TCPD, Unknown method: {s}
+310   <30>HTTPD, Translated filename: {s}
+320   <31>HTTPD, Action: {s}
+330   <30>HTTPD, Query: {s}
+340   <30>HTTPD, SEND_FILE result: {n}
+342   {CLIENT} - {User-} [{DATE-ap}] "{REQUEST}" {nRESP_CODE @} {WSTAT} "{Referer: STR@}" "{User-Agent: STR@}" {Host: STR@}
+343   *log\{MMDD}stat.log*{hh:mm:ss} {CurrentThreadNumber}  HTTP;{CLIENT};{User-};{REQUEST};{nRESP_CODE @};http;{WSTAT};{vReqElapsed};{bps}
+344   *log\{HOST}\{YYYYMM}-http.log*{CLIENT} - {User-} [{DATE-ap}] "{REQUEST}" {nRESP_CODE @} {WSTAT} "{Referer: STR@}" "{User-Agent: STR@}"
+345   *log\cgi-err.log*[{DATE-ap}] {CurrentThreadNumber} "{REQUEST}" {nRESP_CODE @} Err: {n}
+346   *log\cgi-debug.log*[{DATE-ap}] {CurrentThreadNumber} "{REQUEST}" | {s}
+420   <31>TCPD, Command: {s}
+430   *log\{YYYYMM}stat.log*TCPD, STAT: {n}:{n}:{n}:{n}:{n}
+430   <30>TCPD, STAT: {n}:{n}:{n}:{n}:{n}
+431   <30>HTTPPD, STAT: {ELAPSED} {CLIENT} {ACTION}/{vHttpReplyCode} {CLIENT-WRITTEN} {METHOD} {URL} {User-} {HIERARCHY}/{FROM-HOST} {CONTENT-TYPE}
+432   <25>HTTPPD, Read body error {uREADBODY-ERROR @}, {URL}
+433   {UNIXDATE} {ELAPSED} {CLIENT} {ACTION}/{vHttpReplyCode} {CLIENT-WRITTEN} {METHOD} {URL} {User-} {HIERARCHY}/{FROM-HOST} {CONTENT-TYPE} {uREADBODY-ERROR @}
+434   *{Dirs[AV]}\{MMDD}av.log*{YYYYMMDD} {hh:mm:ss} AvScanFile INFECTED File={CURRENT-CACHE-FILENAME}, Virus={s}, ClientReceived={s}
+435   *{Dirs[AV]}\{MMDD}av.log*{YYYYMMDD} {hh:mm:ss} AvScanMemory INFECTED Url={URL}, Virus={s}, ClientReceived=No
+436   *log\{MMDD}stat.txt*{hh:mm:ss} {CurrentThreadNumber}  HTTPP;{CLIENT};{User-};{METHOD} {URL} HTTP/1.0;{vHttpReplyCode};http;{WSTAT};{vReqElapsed};{bps}
+437   *{Dirs[AV]}\{MMDD}av-r.log*{YYYYMMDD} {hh:mm:ss} AvLoad: DbInfo: {s}; Engine: {s}
+438   *{Dirs[AV]}\{MMDD}av-r.log*{YYYYMMDD} {hh:mm:ss} AvReload: DbInfo: {s}; Engine: {s}
+439   *{Dirs[AV]}\{MMDD}av.log*{YYYYMMDD} {hh:mm:ss} AvScanFile error {n}
+440   *{Dirs[AV]}\{MMDD}av.log*{YYYYMMDD} {hh:mm:ss} AvScanFile OK File={CURRENT-CACHE-FILENAME}
+441   *{Dirs[FTP]}\{MMDD}ftpp.log*{YYYYMMDD} {hh:mm:ss} {CurrentThreadNumber} Command to server: {s}
+442   *{Dirs[FTP]}\{MMDD}ftpp.log*{YYYYMMDD} {hh:mm:ss} {CurrentThreadNumber} Command reply:     {s}
+443   *{Dirs[FTP]}\{MMDD}ftpp.log*{YYYYMMDD} {hh:mm:ss} {CurrentThreadNumber} Put to client:     {s}
+444   *{Dirs[FTP]}\{MMDD}ftpp.log*{YYYYMMDD} {hh:mm:ss} {CurrentThreadNumber} Get from client:   {s}
+445   *{Dirs[HTTP]}\{MMDD}httpp-debug.log*{YYYYMMDD} {hh:mm:ss} {CurrentThreadNumber} {METHOD} {URL} | {s}
+446   *{Dirs[HTTP]}\{MMDD}httpp-post-debug.log*{YYYYMMDD} {hh:mm:ss} {CurrentThreadNumber} {METHOD} {URL} | {s}
+450   *{Dirs[Stat]}\{YYYYMM}stat.txt*{YYYY-MM-DD} {hh:mm:ss};{CLIENT};{PROTOCOL};{n};{n};{n};{n};{n}
+451   *{Dirs[Estat]}\{MMDD}stat.log*{hh:mm:ss} {CurrentThreadNumber}  HTTPP;{CLIENT};{User-};{METHOD} {URL} HTTP/1.0;{vHttpReplyCode};http;{WSTAT};{vReqElapsed};{bps}
+452   *{Dirs[Estat]}\{MMDD}stat.log*{hh:mm:ss} {CurrentThreadNumber}  SMTP;{CLIENT};{MAILFROM};{RCPTTO};250;{INCOMINGHOST};{RSTAT};{vReqElapsed};{rbps}
+453   *{Dirs[Estat]}\{MMDD}stat.log*{hh:mm:ss} {CurrentThreadNumber}  POP3;{CLIENT};{User-};{CurrentMessageNumber};;;{CurrentMessageRfc822Size};{vReqElapsed};{bps}
+454   *{Dirs[AdvSoft]}\{YYYYMM}proxy.log*{UNIXDATE} {pELAPSED} {CLIENT} {ACTION}/{vHttpReplyCode} {pCLIENT-WRITTEN} {METHOD} {URL} {User-} {HIERARCHY}/{FROM-HOST} {CONTENT-TYPE}
+455   *{Dirs[AdvSoft]}\{YYYYMM}mail.log*{DD.MM.YYYY};{hh:mm:ss};{CLIENT};{MAILFROM};{RCPTTO};{MESSAGE-SIZE};{H-MESSAGE-ID HSKIP}
+510   Error: {n} {s}Can't listen port:interface {s}. Continue?
+511   Error: {n} {s}Can't listen port:interface {s}. Unknown interface.
+610   <25>UDPMAP, Error: udp servers table overflow
+615   <25>TCPMAP, Can't get IP for connection - {s} - error: {n}
+620   <25>TCPMAP, Can't connect - {s} - error: {n}
+700   <30>SMTPD, {CLIENT}, Connected
+701   <30>SMTPD, {CLIENT}, Reply: {s}
+705   <30>SMTPD, {CLIENT}, HELO {INCOMINGHOST}
+706   <30>SMTPD, {CLIENT}, EHLO {INCOMINGHOST}
+707   <30>SMTPD, {CLIENT}, {s}
+710   <30>SMTPD, {CLIENT}, MAIL FROM: <{MAILFROM}>
+720   <30>SMTPD, {CLIENT}, RCPT TO: <{RCPTTO}>
+730   <30>SMTPD, {CLIENT}, DATA, {n}
+740   <30>SMTPD, {CLIENT}, BDAT, {n}
+750   <30>SMTPD, {CLIENT}, QUIT
+760   <30>SMTPD, {CLIENT}, RSET
+770   <30>SMTPD, {CLIENT}, BlackList
+771   <30>SMTPD, {CLIENT}, WhiteList, {User}
+780   <30>SMTPD, {CLIENT}, OrdbBlacklist
+781   <30>SMTPD, {CLIENT}, MapsBlacklist
+790   <30>SMTPD, {CLIENT}, Can't get IP of HELO host, err={n}
+791   <30>SMTPD, {CLIENT}, IP of HELO host not match PeerIP
+810   <30>FTPD, Data connection error: {n}
+842   {CLIENT} - {User-} [{DATE-ap}] "{COMMANDLINE}" {nRESP_CODE @} {WSTAT} "{URI}" "{Pass-}" {CLIENT} {uACTION-RESULT @}
+910   *{Dirs[Logs]}\smtp\{YYYYMM}mail.txt*{YYYY-MM-DD} {hh:mm:ss};{MAILFROM};{RCPTTO};{MESSAGE-SIZE};{H-MESSAGE-ID HSKIP};{CLIENT};{MESSAGE-CLASS}
+920   *{Dirs[Logs]}\smtp\{YYYYMM}mail-refused.txt*{YYYY-MM-DD} {hh:mm:ss};{MAILFROM};{RCPTTO};{MESSAGE-SIZE};{H-MESSAGE-ID HSKIP};{CLIENT};{MESSAGE-CLASS}
+921   *{Dirs[Logs]}\smtp\{YYYYMM}mail-refused.txt*{YYYY-MM-DD} {hh:mm:ss};{MAILFROM};;0;;{CLIENT};
+922   *{Dirs[Logs]}\smtp\{YYYYMM}mail-refused.txt*{YYYY-MM-DD} {hh:mm:ss};{MAILFROM};{RCPTTO};0;;{CLIENT};
+923   *{Dirs[Logs]}\smtp\{YYYYMM}mail-spam.txt*{YYYY-MM-DD} {hh:mm:ss};{MAILFROM};{RCPTTO};{MESSAGE-SIZE};{H-MESSAGE-ID HSKIP};{H-SUBJECT};{CLIENT};{MESSAGE-CLASS}
+924   *{Dirs[Logs]}\smtp\{YYYYMM}mail-virus.txt*{YYYY-MM-DD} {hh:mm:ss};{MAILFROM};{RCPTTO};{MESSAGE-SIZE};{H-MESSAGE-ID HSKIP};{H-SUBJECT};{CLIENT};{VIRUS-NAME}
+930   *{Dirs[Logs]}\pop3\{YYYYMM}popmail.txt*{YYYY-MM-DD} {hh:mm:ss};{Env.From};{Env.To};{CurrentMessageRfc822Size};{Env.Message-Id};{Env.Subject};{CLIENT};{User-}
+1310  *{Dirs[Logs]}\TrafC\{MMDD}CanalKit.log*{hh:mm:ss} CanalKit: {WhatCanals} | {CLIENT} {User-} {URL}
+1311  *{Dirs[Logs]}\TrafC\{MMDD}CanalKit.log*{hh:mm:ss} CanalKitBlocked!
+1321  *{Dirs[Logs]}\TrafC\{MMDD}bands.log*{hh:mm:ss} {BandsStatStr}
+1322  *{Dirs[Logs]}\TrafC\{MMDD}quotas.log*{hh:mm:ss} {QuotasStatStr}
+1410  *{Dirs[Socks]}\{MMDD}socks.log*{hh:mm:ss} {CurrentThreadNumber} Socks connection from: {CLIENT}:{PeerPort}
+1420  *{Dirs[Socks]}\{MMDD}socks.log*{hh:mm:ss} {CurrentThreadNumber} Command: {COMMANDLINE} {TARGET-HOST}({TARGET-IP NtoA}):{TARGET-PORT} from {CLIENT} (LoggedAs: {User-})
+1430  *{Dirs[Socks]}\{MMDD}socks.log*{hh:mm:ss} {CurrentThreadNumber} Connect to {TARGET-IP NtoA}:{TARGET-PORT} failed. Error: {n}
+1431  *{Dirs[Socks]}\{MMDD}socks.log*{hh:mm:ss} {CurrentThreadNumber} Can't get IP for host: {TARGET-HOST}
+1440  *{Dirs[Socks]}\{MMDD}socks.log*{hh:mm:ss} {CurrentThreadNumber} Connected to {TARGET-IP NtoA}:{TARGET-PORT}. My side {TARGET-SOCK sockIP&Port DROP NtoA}:{TARGET-SOCK sockIP&Port NIP}.
+1450  *{Dirs[Socks]}\{MMDD}socks.log*{hh:mm:ss} {CurrentThreadNumber} Map socket return: {n}
+1451  *{Dirs[Socks]}\{MMDD}socks.log*{hh:mm:ss} {CurrentThreadNumber} Reply return: {n}
+0     <26>TCPD, Unknown entry code {uLAST-ERROR @}

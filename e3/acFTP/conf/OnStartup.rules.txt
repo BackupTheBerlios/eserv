@@ -1,0 +1,7 @@
+MaxThreads: {FTP[MaxConnections]}
+
+S" LoadPlugins" EvalRules
+
+Listen:
+{FTP[Port]} {FTP[NetworkInterface]}
+

@@ -1,0 +1,7 @@
+\ проверка MPC-ENTITY и MPC-CLASS на соответствие AMTP policy этого сервера
+\ 10.09.2003: пока не встречались MTA, использующие AMTP,
+\ так что это на будущее.
+
+MPC-CLASS =~ optout | " 550 MPC policy violation{CRLF}" SMTP_FPUTS \EOF
+
+" 250 Okay{CRLF}" SMTP_FPUTS

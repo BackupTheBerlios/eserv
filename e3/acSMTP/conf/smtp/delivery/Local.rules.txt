@@ -1,0 +1,12 @@
+( ƒоставка сообщени€ в локальный почтовый €щик )
+
+MESSAGE-CLASS =~ spam
+[IF]
+  CopyCurrentFileTo: "{FIELD3 S@}\{RCPTTO GetUserFromEmail}\spam\{MAILFROM}!{RANDOM-ID}.eml"
+  EvalRules: smtp\delivery\SpamRobots
+  RCPTTO DelRcpt
+[ELSE]
+  CopyCurrentFileTo: "{FIELD3 S@}\{RCPTTO GetUserFromEmail}\INBOX\{MAILFROM}!{RANDOM-ID}.eml"
+  EvalRules: smtp\delivery\Robots
+  RCPTTO DelRcpt
+[THEN]

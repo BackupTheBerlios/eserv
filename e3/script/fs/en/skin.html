@@ -1,0 +1,314 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>Eserv/Eproxy control</title>
+<link rel="stylesheet" href="/fs/style.css">
+</head>
+<body topmargin="0" leftmargin="0" marginheight="0" marginwidth="0"
+bgcolor="#E0F0F0" text="#000000" link="#000099" alink="#0000ff"
+vlink="#000099"><a name="TOP"></a>
+
+
+<table border="0" cellspacing="0" cellpadding="0" height="48" width="100%" bgcolor="#BFCFFF">
+
+<tr>
+<td align="left" rowspan="2" valign="top"> 
+<h1>Eserv / Eproxy - Управление серверами</h1>
+</td>
+</tr><tr>
+<td align="right" valign="top">
+<font color="#ffffff"><b>
+<!--[date]-->
+</b>&nbsp;<br>
+</font>
+</td>
+</tr>
+
+<tr>
+<td align="right" valign="bottom">
+&nbsp;
+<a href="/" class="small"> << к началу </a>
+|<a href=".." class="small"> ^ выше </a>
+|<a href="http://www.eserv.ru/Downloads" class="small"> скачать </a>
+|<a href="http://www.eserv.ru/Docs" class="small"> документация </a>
+|<a href="http://forum.etype.net/viewforum.php?f=4" class="small"> форум </a>
+|<a href="http://www.eserv.ru/Support" class="small"> поддержка </a>
+|<a href="http://www.eserv.ru/ru/support/ticket_edit.php?lang=ru" class="small"> сообщить об ошибке </a>
+&nbsp;
+</td>
+</tr>
+
+
+</table>
+
+
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr bgcolor="#000080"><td height="1" colspan="3"></td></tr>
+
+<tr bgcolor="#000080">
+
+<td align="left" width="25%">
+<a href="http://www.eserv.ru/" class="small80">
+&nbsp;www.ESERV.ru&nbsp;</a>
+</td>
+
+<!--
+<form method="get" action="http://www.yandex.ru/yandsearch">
+<td align="left" width="40%">
+<input class="small" type="hidden" name="serverurl" value="www.eserv.ru">
+<input class="small" type="text" name="text" value="что искать" size="30">
+<input class="small" type="submit" value="поиск">
+</td>
+</form>
+-->
+<form methdo="get" action="http://www.eserv.ru/ru/search/">
+<td align="left" width="40%">
+<input class="small" type="text" name="q" value="Eserv Eproxy" size="30">
+<input class="small" type="submit" value="поиск">
+</td>
+</form>
+
+<!-- http://www.google.com/search?as_q=10055&num=10&btnG=%CF%EE%E8%F1%EA+%E2+Google&as_epq=&as_oq=&as_eq=&lr=&as_ft=i&as_filetype=&as_qdr=all&as_occt=any&as_dt=i&as_sitesearch=www.microsoft.com -->
+
+<form method="post" action="http://www.eserv.ru/ru/about/subscr_edit.php">
+<td align="right">
+<input class="small" type="text" name="sf_EMAIL" value="email" size="20">
+<input class="small" type="submit" name="sf_button" value="подписка">
+</td>
+</form>
+
+</tr>
+
+<tr bgcolor="#000080"><td height="1" colspan="3"></td></tr>
+
+</table>
+
+
+<!-- ========================================================== -->
+<table cellpadding="1" cellspacing="0" width="100%">
+
+  <tr valign="top">
+
+<!--  <td bgcolor="black" width="1"></td> -->
+
+  <td width="25%" bgcolor="#D0E0F0">
+  <table cellpadding="10" cellspacing="0" width="100%">
+    <tr>
+    <td valign="top">
+      <script LANGUAGE="JavaScript" src=/js/js1.js></script>
+      <script LANGUAGE="JavaScript1.2" src=/js/js12.js></script>
+Общие параметры:<br>
+
+<div ID="auth1_Parent" CLASS="parent">
+<a href="/conf/plugins/auth/{LANG}/docs.html" onClick="expandIt('auth1_'); return false;">
+<img src="/images/plus.gif" border="0" alt="+" width="9" height="9" id="auth1_Img"></a>
+
+<a href="/conf/plugins/auth/{LANG}/docs.html" onClick="expandIt('auth1_');">
+Авторизация</a>
+</div>
+
+<div ID="auth1_Child" CLASS="child">
+<ul>
+<li><a class="item" HREF="/main/1/{Lists[LocalDomains]}">Локальные домены</a>
+<li><a class="item" HREF="/main/1/{AUTH[AuthSources]}">Источники авторизации</a>
+<!--<li><a class="item" HREF="/conf/{PluginPath}/{LANG}/users.html">Пользователи и группы</a>-->
+<li><a class="item" HREF="/main/1/{Lists[LocalNetworks]}">Локальные сети</a>
+<!-- <li><a class="item" HREF="/conf/{PluginPath}/{LANG}/ip_auth.html">IP-авторизация</a> -->
+<li><a class="item" HREF="/main/script/fs/scripts/uc/">Конвертация пользователей из Eserv.ini (Eserv/2) в MD5 file</a>
+</ul>
+</div>
+
+<div ID="srv_Parent" CLASS="parent">
+<a href="/" onClick="expandIt('srv_'); return false;">
+<img src="/images/plus.gif" border="0" alt="+" width="9" height="9" id="srv_Img"></a>
+
+<a href="/" onClick="expandIt('srv_');">
+Службы (сервисы) WinNT</a>
+</div>
+
+<div ID="srv_Child" CLASS="child">
+<ul>
+<li><a class="item" HREF="/{LANG}/install.html?service=acSMTP">Установить службу acSMTP</a>
+<li><a class="item" HREF="/{LANG}/uninstall.html?service=acSMTP">Удалить службу acSMTP</a>
+<li><a class="item" HREF="/{LANG}/install.html?service=acIMAP">Установить службу acIMAP</a>
+<li><a class="item" HREF="/{LANG}/uninstall.html?service=acIMAP">Удалить службу acIMAP</a>
+<li><a class="item" HREF="/{LANG}/install.html?service=acWEB">Установить службу acWEB</a>
+<li><a class="item" HREF="/{LANG}/uninstall.html?service=acWEB">Удалить службу acWEB</a>
+<li><a class="item" HREF="/{LANG}/install.html?service=acFTP">Установить службу acFTP</a>
+<li><a class="item" HREF="/{LANG}/uninstall.html?service=acFTP">Удалить службу acFTP</a>
+<li><a class="item" HREF="/{LANG}/install.html?service=eproxy">Установить службу Eproxy</a>
+<li><a class="item" HREF="/{LANG}/uninstall.html?service=eproxy">Удалить службу Eproxy</a>
+</ul>
+</div>
+
+
+<div ID="plg_Parent" CLASS="parent">
+<a href="/" onClick="expandIt('plg_'); return false;">
+<img src="/images/plus.gif" border="0" alt="+" width="9" height="9" id="plg_Img"></a>
+
+<a href="/" onClick="expandIt('plg_');">
+Расширения (plugins)</a>
+</div>
+
+<div ID="plg_Child" CLASS="child">
+<ul>
+<li><a class="item" HREF="/list.html">Полный список расширений</a>
+</ul>
+</div>
+
+
+<p>Параметры SMTP:<br>
+
+<div ID="smtp1_Parent" CLASS="parent">
+<a href="/" onClick="expandIt('smtp1_'); return false;">
+<img src="/images/plus.gif" border="0" alt="+" width="9" height="9" id="smtp1_Img"></a>
+
+<a href="/" onClick="expandIt('smtp1_');">
+Управление доступом</a>
+</div>
+
+<div ID="smtp1_Child" CLASS="child">
+<ul>
+<li><a class="item" HREF="/main/1/{SMTP[IpBlackList]}">Черный список IP</a>
+<li><a class="item" HREF="/main/1/{SMTP[IpWhiteList]}">Белый список IP</a>
+<li><a class="item" HREF="/main/1/{SMTP[FromEmailBlackList]}">Черный список Email отправителей</a>
+<li><a class="item" HREF="/main/1/{SMTP[FromEmailWhiteList]}">Белый список Email отправителей</a>
+<li><a class="item" HREF="/main/1/{SMTP[ToEmailBlackList]}">Черный список Email получателей</a>
+<li><a class="item" HREF="/main/1/{SMTP[ToEmailWhiteList]}">Белый список Email получателей</a>
+<li><a class="item" HREF="/main/1/{SMTP[FromEmailNeedAuthList]}">Email, требующие SMTP-авторизации</a>
+</ul>
+</div>
+
+<div ID="smtp2_Parent" CLASS="parent">
+<a href="/" onClick="expandIt('smtp2_'); return false;">
+<img src="/images/plus.gif" border="0" alt="+" width="9" height="9" id="smtp2_Img"></a>
+
+<a href="/" onClick="expandIt('smtp2_');">
+Маршрутизация</a>
+</div>
+
+<div ID="smtp2_Child" CLASS="child">
+<ul>
+<li><a class="item" HREF="/main/1/{SMTP[ToEmailAliases]}">Псевдонимы (alias'ы)</a>
+<li><a class="item" HREF="/main/1/{SMTP[EmailSmtpForward]}">Пересылка на другой SMTP-сервер</a>
+</ul>
+</div>
+
+<div ID="smtp3_Parent" CLASS="parent">
+<a href="/" onClick="expandIt('smtp3_'); return false;">
+<img src="/images/plus.gif" border="0" alt="+" width="9" height="9" id="smtp3_Img"></a>
+
+<a href="/" onClick="expandIt('smtp3_');">
+Pop3->Smtp</a>
+</div>
+
+<div ID="smtp3_Child" CLASS="child">
+<ul>
+<li><a class="item" HREF="/main/1/{Pop2smtp[Boxes]}">Получать почту из внешних POP3-ящиков</a>
+</ul>
+</div>
+
+<div ID="smtp4_Parent" CLASS="parent">
+<a href="/" onClick="expandIt('smtp4_'); return false;">
+<img src="/images/plus.gif" border="0" alt="+" width="9" height="9" id="smtp4_Img"></a>
+
+<a href="/" onClick="expandIt('smtp4_');">
+Фильтры содержания</a>
+</div>
+
+<div ID="smtp4_Child" CLASS="child">
+<ul>
+<li><a class="item" HREF="/main/1/{SMTP[BlackListSubject]}">Черный список тем</a>
+<li><a class="item" HREF="/main/1/{SMTP[BlackListContentType]}">Черный список Content-Type</a>
+</ul>
+</div>
+
+<div ID="smtp5_Parent" CLASS="parent">
+<a href="/" onClick="expandIt('smtp5_'); return false;">
+<img src="/images/plus.gif" border="0" alt="+" width="9" height="9" id="smtp5_Img"></a>
+
+<a href="/" onClick="expandIt('smtp5_');">
+Автоответчики</a>
+</div>
+
+<div ID="smtp5_Child" CLASS="child">
+<ul>
+<li><a class="item" HREF="/main/1/{SMTP[AutoReply]}">Активные автоответчики</a>
+<li><a class="item" HREF="/main/1/{SMTP[NoAutoReplyTo]}">Не отвечать отправителям...</a>
+</ul>
+</div>
+
+<p>Параметры EPROXY:<br>
+      {MainMenuFile EVAL-FILE}
+      {PluginsMenu}
+      <script LANGUAGE="JavaScript1.2" src=/js/js123.js></script>
+      <script LANGUAGE="JavaScript1.2" src=/js/ext1.js></script>
+    </td>
+    </tr>
+  </table>
+  </td>
+
+  <td bgcolor="black" width="1"><br></td>
+
+  <td width="80%">
+  <table width="100%" cellpadding="4" cellspacing="0">
+    <tr valign="top">
+    <td>
+<font color="red"><b>Ваш браузер не настроен на полноценную поддержку
+кириллицы.<br> Часть возможностей интерфейса могут быть недоступны.</b></font>
+{MainScript}
+    </td>
+    </tr>
+  </table>
+  </td>
+
+<td bgcolor="black" width="1"><br></td>
+
+  </tr>
+</table>
+
+<!-- ========================================================== -->
+
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+
+<tr bgcolor="#000080"><td height="1" colspan="3"></td></tr>
+<tr bgcolor="#000080">
+<td align="right" valign="bottom">
+<!--<a href="/source/" class="small80">show source</a>&nbsp;
+<font color=white>|</font>&nbsp;-->
+<a href="http://eproxy.etype.net/credits/" class="small80">&nbsp;credits </a>&nbsp;<br>
+</td>
+</tr>
+<tr bgcolor="#000080"><td height="1" colspan="3"></td></tr>
+</table>
+
+
+<table border="0" cellspacing="0" cellpadding="6" width="100%">
+
+<tr valign="top" bgcolor="#BFCFFF">
+
+<td>
+<small>
+<a href="http://www.etype.ru/etype/">Copyright &copy; 1996-2003 Etype</a><br>
+All rights reserved.<br>
+</small>
+</td>
+
+<td align="right"><small>
+<!--Rating@Mail.ru COUNTER--<a target=_top
+href="http://top.mail.ru/jump?from=287833"><img
+src="http://top.list.ru/counter?id=287833;t=57"
+border=0 height=31 width=88
+alt="Рейтинг@Mail.ru: Посещения с 25 декабря 2001"></a>--/COUNTER-->
+
+<a href=http://spf.sf.net/><img src="/fs/img/powered-by-spf-mono-2.gif" border="0" alt="All software here is written in SPF"></a>&nbsp;
+<a href=http://forth-script.sf.net/><img src="/fs/img/powered-by-forthscript-mono.gif" border="0" alt="This site using Forth Script engine"></a>&nbsp;
+<a href=http://www.etype.net/><img src="/fs/img/powered-by-eserv-3.gif" border="0" alt="This site running on Eserv/3 software"></a>
+</small>
+</td>
+
+</tr>
+</table>
+
+</body>
+</html>

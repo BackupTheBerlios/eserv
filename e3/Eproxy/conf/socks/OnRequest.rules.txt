@@ -1,0 +1,6 @@
+
+\ " Request from user {User} ({User-}:{Pass}), {CLIENT} " STYPE CR
+\ "   MySide {IP NtoA}:{Port}   ClientSide {PeerIP NtoA}:{PeerPort} " STYPE CR
+\ "   Command: {COMMANDLINE} {TARGET-HOST}({TARGET-IP NtoA}):{TARGET-PORT} " STYPE CR
+1420 LOG
+

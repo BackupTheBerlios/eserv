@@ -1,0 +1,184 @@
+<html>
+<head>
+<title>Traffic Control</title>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+<meta HTTP-EQUIV="keywords" CONTENT="traffic control, TrafC, bandwidth, quota, priority, eserv, proxy, limits, restricting, трафик, ограничение, квоты">
+<meta HTTP-EQUIV="description" CONTENT="text/html; charset=windows-1251">
+</head>
+
+<body leftmargin=18 marginheight="0" marginwidth="0" bottommargin="10" topmargin="20">
+
+<table border=0 cellspacing=0 cellpadding=0 width=100%> <tr><td>
+
+<h2>
+    Некоторые слова и выражения, употребимые в правилах.
+</h2>
+<p>
+    В скобках указана стековая нотация  ( до_выполнения -- после_выполнения ).
+    Значения, указанные в кавычках, берутся из входного потока (а не из стека).
+<br>
+    Все имена регистрозависимы. В качестве разделителя использовать пробел.
+</p>
+
+<table border=1 cellspacing=1 cellpadding=1 width=98%> 
+
+<tr><th>
+    Имя
+</th><th>
+    Стековая нотация
+</th><th>
+    Комментарий
+</th></tr>
+
+<tr><td align=center>
+    | 
+</td><td>
+    ( flag -- ) 
+</td><td>
+    Слово '|' используется в строках файла правил. 
+    Часть строки справа от | выполняется, если условие (часть слева от | ) истинно.
+</td></tr>
+<tr><td>
+    IP= 
+</td><td>
+    ( "ip_address" -- flag ) 
+</td><td>
+    flag-истина, если клиент соединился с сервером по указанному IP
+<br>
+    i.e.   IP= 10.0.0.1 
+</td></tr>
+<tr><td>
+    Port= 
+</td><td>
+    ( "port" -- flag ) 
+</td><td>
+    flag-истина, если клиент соединился с сервером по указанному порту
+</td></tr>
+<tr><td>
+    IP:Port= 
+</td><td>
+    ( "ip_address:port" -- flag ) 
+</td><td>
+    flag-истина, если клиент соединился с сервером по указанному IP и порту
+</td></tr>
+<tr><td>
+    PeerIP:Port= 
+</td><td>
+    ( "ip_address:port" -- flag ) 
+</td><td>
+    flag-истина, если клиент соединился с указанного IP и порта
+</td></tr>
+<tr><td>
+    PeerIP= 
+</td><td>
+    ( "ip_address" -- flag ) 
+</td><td>
+    flag-истина, если клиент соединился с указанного IP
+</td></tr>
+<tr><td>
+    PeerPort= 
+</td><td>
+    ( "port" -- flag ) 
+</td><td>
+    flag-истина, если клиент соединился с сервером с указанного порта
+</td></tr>
+<tr><td>
+    PeerIP:Mask= 
+</td><td>
+    ( "ip:mask" -- flag ) 
+</td><td>
+    flag-истина, если клиент соединился с сервером с указанного диапазона IP-адресов
+<br>
+    i.e.   PeerIP:Mask= 10.0.0.0:255.255.255.0 
+</td></tr>
+<tr><td>
+    CLIENT 
+</td><td>
+    ( -- addr u ) 
+</td><td>
+    PeerIP NtoA (ip-адрес клиента в виде строки)
+</td></tr>
+<tr><td>
+    =~ 
+</td><td>
+    ( addr u "mask" -- flag )
+</td><td>
+    сравнение строки, представленой адресом и длиной, с маской.  
+<br>
+    i.e.   URL =~ http://* 
+</td></tr>
+<tr><td>
+    ~  
+</td><td>
+    ( str "mask" -- flag )
+</td><td>
+    сравнение по маске со строкой, представленой str
+</td></tr>
+<tr><td>
+    User 
+</td><td>
+    ( -- addr u )
+</td><td>
+    возвращает имя пользователя ( u = 0, если имени нет)
+<br>
+    i.e. User =~ admin 
+</td></tr>
+<tr><td>
+    URL 
+</td><td>
+    ( -- addr u )
+</td><td>
+    возвращает урл. (для acFreeProxy) 
+</td></tr>
+<tr><td>
+<a name=eof></a>
+    \EOF 
+</td><td>
+    ( -- )
+</td><td>
+    закончить трансляцию текущего файла (не проверяя остальные правила)
+</td></tr>
+<tr><td>
+    AND
+</td><td>
+    ( flag1 flag2 -- flag )
+</td><td>
+    flag = flag1 AND flag2
+<br>
+    Для флагов - логическое И, для чисел - побитовое.
+</td></tr>
+<tr><td>
+    OR
+</td><td>
+    ( flag1 flag2 -- flag )
+</td><td>
+    flag = flag1 OR flag2
+<br>
+    Для флагов - логическое ИЛИ, для чисел - побитовое.
+</td></tr>
+<tr><td>
+    XOR
+</td><td>
+    ( flag1 flag2 -- flag )
+</td><td>
+    flag = flag1 XOR flag2
+<br>
+    Для флагов - логическое ИсключающееИЛИ, для чисел - побитовое.
+</td></tr>
+<tr><td>
+    NOT
+</td><td>
+    ( flag1 -- flag )
+</td><td>
+    flag = NOT flag1
+<br>
+    Для флагов - логическое Отрицание, для чисел - побитовое.
+</td></tr>
+
+</table>
+
+
+</th></tr></table> 
+
+</body>
+</html>

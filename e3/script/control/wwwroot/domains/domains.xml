@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<!--?xml-stylesheet type="text/xsl" href="domains.xsl"?-->
+<Domains>
+<DefaultDomain>{Server[DefaultDomain]}</DefaultDomain>
+<DefaultAuth>{AUTH[AuthMethod]}</DefaultAuth>
+<DefaultAuthSource>{AUTH[DefaultAuthSource]}</DefaultAuthSource>
+<CurrentDomain>{domain}</CurrentDomain>
+<Action>{action}</Action>
+<List>
+{S" Domains.sql" SqlQueryXmlFile}
+</List>
+<ExtList>
+{S" Domains.sql" SqlQueryXmlFile@}
+</ExtList>
+<Domain>
+{S" Domain.sql" SqlQueryXmlFile}
+</Domain>
+</Domains>

@@ -1,0 +1,10 @@
+http://updates3.kaspersky-labs.com/updates
+http://updates2.kaspersky-labs.com/updates
+http://updates1.kaspersky-labs.com/updates
+http://updates-us1.kaspersky-labs.com/updates
+http://downloads1.kaspersky-labs.com/updates
+http://downloads-us1.kaspersky-labs.com/updates
+ftp://updates1.kaspersky-labs.com/updates
+ftp://updates3.kaspersky-labs.com/updates
+ftp://downloads1.kaspersky-labs.com/updates
+ftp://downloads-us1.kaspersky-labs.com/updates

@@ -1,0 +1,39 @@
+\ Устанавливаем каталоги по умолчанию в зависимости от IP
+\ нашего сервера, к которому произведено подключение (если multihomed,
+\ то можно сделать независимый виртуальный сервер на каждом IP)
+
+IP NtoA FTP[VirtualServerIP] IsInFile 
+[IF] DocumentRoot: "{FIELD2 S@}"
+[ELSE]
+  \ Если в таблице не нашлось, ставим значение по умолчанию
+  DocumentRoot: FTP[DefaultDocumentRoot]
+[THEN]
+
+\ Если пользователь авторизовался с учетной записью в домене,
+\ то ищем его собственный каталог по User@Domain (т.е. UserEmail)
+
+UserEmail FTP[UserHome] IsInFile | DocumentRoot: "{FIELD2 S@}"
+
+( DocumentRoot задает каталог, файлы из которого будут выдаваться
+  ftp-сервером.
+  Путь в DocumentRoot задается абсолютный, например D:\IntetPub,
+  \\computer\share\path или относительно каталога ftp-сервера,
+  как ftproot в настройке по умолчанию.
+)
+
+(
+LoggedAs: webmaster 0= | MainCommands TO vWid
+DocumentRoot: ftproot
+Uri /d/* LoggedAs: webmaster AND | URI 2 - SWAP 2 + SWAP SetUri DocumentRoot: d:
+Uri /c/* LoggedAs: webmaster AND | URI 2 - SWAP 2 + SWAP SetUri DocumentRoot: c:
+Uri /incoming* | PrivCommands TO vWid
+)
+
+\ FILENAME TYPE CR
+
+( Базовая проверка прав доступа. Безусловное закрытие Uri,
+  содержащих ".." для предотвращения выхода на вышележащие каталоги
+)
+File *\admin\* LoggedAs: Administrator AND | Unauthorized Administrator1
+Uri *..*                   | Forbidden
+File *::$*                  | Forbidden

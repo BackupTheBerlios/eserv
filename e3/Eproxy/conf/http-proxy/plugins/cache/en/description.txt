@@ -1,0 +1,1 @@
+Caching proxy requests to accelerate web access and minimize extern traffic.

@@ -1,0 +1,4 @@
+\ Plugin: plugins\console
+Plugin: plugins\mlogc
+Plugin: plugins\service
+Plugin: ftp\plugins\apache_log

@@ -1,0 +1,26 @@
+Plugin: plugins\service
+\ Plugin: plugins\console
+Plugin: plugins\rconsole
+\ Plugin: plugins\syslog
+Plugin: plugins\mlogc
+Plugin: plugins\monitoring
+Plugin: plugins\auth
+Plugin: plugins\TrafC
+\ Plugin: plugins\groups_e2
+Plugin: http-proxy\plugins\alias
+Plugin: http-proxy\plugins\redirect
+Plugin: http-proxy\plugins\acl
+\ Plugin: http-proxy\plugins\ads_block
+\ Plugin: http-proxy\plugins\black_list
+Plugin: http-proxy\plugins\hierarchy
+Plugin: http-proxy\plugins\TrafC
+Plugin: http-proxy\plugins\cache
+\ Plugin: http-proxy\plugins\antivirus
+\ Plugin: http-proxy\plugins\antivirus\kav
+\ Plugin: http-proxy\plugins\antivirus\drweb
+\ Plugin: plugins\activity_log
+Plugin: plugins\udpmap
+\ Plugin: plugins\http-map
+Plugin: plugins\tcpmap
+Plugin: plugins\pop3proxy
+\ Plugin: plugins\firewall

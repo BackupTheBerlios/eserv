@@ -1,0 +1,6 @@
+Timeout: 240000
+
+IsLanClient 0= | " 400 access denied.{CRLF}" FPUTS StopProtocol \EOF
+" 220 {PROG-NAME} FTP-proxy ready.{CRLF}" FPUTS
+FtpProxy[UsePASV] >NUM uUSE-PASV !
+\ LogLevel: 7

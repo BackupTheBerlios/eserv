@@ -1,0 +1,11 @@
+FIELD2 S@ " {s}" STR@ \ сохраним адрес на стеке, т.к. FIELD2 перезапишется IsInFile
+
+RCPTTO SMTP[RestrictedAliases] IsInFile
+[IF]
+  MAILFROM FIELD2 S@ IsInFile \ в списке разрешенных Email отправителей для этого алиаса?
+  [IF] " 250 {RCPTTO} OK, maillist{CRLF}" SMTP_FPUTS AddRcpt FALSE \EOF
+  [ELSE] 2DROP " 550 {MAILFROM} is not authorized sender{CRLF}" RcptToError
+  [THEN]
+[ELSE]
+  2DUP " 250 {RCPTTO} OK, aliased to {s}{CRLF}" SMTP_FPUTS AddRcpt FALSE \EOF
+[THEN]

@@ -1,0 +1,5 @@
+\ LocalRedirect {LANG}/connect_error.html?error_code={uCONNECT-ERROR @}
+\ S" Connect error" 120 LOG
+\ uCONNECT-ERROR @ 110 LOG
+\ LANG 120 LOG
+Unavailable conf\http-proxy\wwwroot\{LANG}\connect_error2.html

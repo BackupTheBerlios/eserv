@@ -1,0 +1,4 @@
+\ CascadeVia: proxy.host proxy.port proxy.user proxy.pass
+\ CascadeVia: proxy.enet.ru 3128
+\ CascadeVia: 192.168.0.1 3130
+\ DirectConnectionAllowed

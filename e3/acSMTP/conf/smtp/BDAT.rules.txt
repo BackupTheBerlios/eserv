@@ -1,0 +1,19 @@
+\ Этот файл запускается при приеме тела письма несколько раз.
+\ Используется, только если отправитель выбрал способ доставки CHUNKED -
+\ вместо команды DATA используется блочный BDAT.
+\ В этом случае заголовки письма не анализируем.
+\ BDAT можно запретить, убрав из EHLO.pat строку 250-CHUNKING
+
+\ Правило возвращает на стеке истину, если в приёме отказано.
+\ Если приём был разрешён, на стеке возвращается ложь.
+
+\ если превышен максимально допустимый размер письма,
+\ отправителю выдаётся отказ, при этом выставляется признак прерывания приёма
+MESSAGE-SIZE MaxMessageSize > DUP | " 552 ERR too large message size{CRLF}" SMTP_FPUTS \EOF
+
+uMAILFILEH @ 0= | EvalRules: smtp\delivery\SpoolFile
+
+ReadDataChunk
+
+\ Доставку будем делать в OnNewMail, а не здесь, но можно задать особые правила
+\ IsLastChunk | " ..\utils\smtpsend.exe -s localhost -p 2525 -o temp\smtpsend-{GetTickCount}-{uCurrentThreadNumber @}.log" STR@ StartApp DROP

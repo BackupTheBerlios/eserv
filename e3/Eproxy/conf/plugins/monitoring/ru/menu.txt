@@ -1,0 +1,1 @@
+http://{SERVER_NAME}:3128/monitor.txt;Начать мониторинг работы

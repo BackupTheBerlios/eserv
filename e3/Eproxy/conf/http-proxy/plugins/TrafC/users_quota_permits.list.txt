@@ -1,0 +1,2 @@
+User as_admin     Can Q1 Q2 Qtest1
+User vasia_pupkin Can Q1    Qtest1

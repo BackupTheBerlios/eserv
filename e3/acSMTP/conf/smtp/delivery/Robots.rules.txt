@@ -1,0 +1,5 @@
+" {FIELD3 S@}\{RCPTTO GetUserFromEmail}\INBOX\.callback" STR@ 2DUP
+FileExists [IF] INCLUDED [ELSE] 2DROP [THEN]
+
+" {FIELD3 S@}\{RCPTTO GetUserFromEmail}\INBOX\.robot" STR@ 2DUP
+FileExists [IF] INCLUDED [ELSE] 2DROP [THEN]

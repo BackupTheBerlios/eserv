@@ -1,0 +1,10 @@
+{
+ S" ..\scripts\install.f" INCLUDED S" "
+}
+<h2>Install service</h2>
+<font color=red>
+{IsServiceStarted
+[IF] S" The service is already started"
+[ELSE] InstallService [THEN]
+}</font>
+</form>

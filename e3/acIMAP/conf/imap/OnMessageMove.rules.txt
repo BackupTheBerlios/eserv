@@ -1,0 +1,7 @@
+REQUIRE PopFileAddToBucket ..\acSMTP\conf\smtp\plugins\popfile\index.f
+
+MSG-FOLDER =~ *not_spam
+| " {ModuleDirName}{MSG-FILE}" STR@ 2DUP TYPE S" clear" PopFileAddToBucket TYPE CR \EOF
+
+MSG-FOLDER =~ *spam
+| " {ModuleDirName}{MSG-FILE}" STR@ 2DUP TYPE S" spam" PopFileAddToBucket TYPE CR \EOF

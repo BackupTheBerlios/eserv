@@ -1,0 +1,23 @@
+Timeout: 240000
+
+FTP[Active] >NUM 0=
+| " 451 Sorry, this server is temporary down for maintenance. Please try again later.{CRLF}" 451 PostFtpResult StopProtocol \EOF
+
+CLIENT FTP[IpBlackList] IsInFile
+| " 421 {CLIENT}, your IP is in my BlackList. {FIELD2}{CRLF}" 421 PostFtpResult StopProtocol \EOF
+
+" 220 {Server[HostName]} Eserv/3.{KBUILD} acFTP ready{CRLF}" 220 PostFtpResult \EOF
+
+( примеры способов явного задания сетей и IP:
+Port= 21 PeerIP:Mask= 193.124.6.0:255.255.255.0 AND | " 220 acFTP ready.{CRLF}" 220 PostFtpResult \EOF
+Port= 21 PeerIP= 192.168.0.1 AND | " 220 acFTP ready.{CRLF}" 220 PostFtpResult \EOF
+Port= 21 PeerIP= 192.168.0.4 AND | " 220 acFTP ready.{CRLF}" 220 PostFtpResult \EOF
+Port= 21 PeerIP= 10.1.1.2 AND | " 220 acFTP ready.{CRLF}" 220 PostFtpResult \EOF
+Port= 21 PeerIP:Mask= 192.168.0.0:255.255.255.0 AND | " 220 acFTP ready.{CRLF}" 220 PostFtpResult \EOF
+
+Port= 21 PeerIP= 194.186.20.1 AND | " 220 acFTP ready.{CRLF}" 220 PostFtpResult \EOF
+PeerIP= 209.15.179.216 | " 220 acFTP ready.{CRLF}" 220 PostFtpResult \EOF
+PeerIP= 127.0.0.1 | " 220 acFTP ready.{CRLF}" 220 PostFtpResult \EOF
+
+" 421 acFTP denied for you.{CRLF}" 421 PostFtpResult CloseConnection
+)

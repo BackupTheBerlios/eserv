@@ -1,0 +1,3 @@
+" Datagramm incomming, SOCKS5_UDP_HDR {TARGET-HOST}:{TARGET-PORT} " STYPE CR
+TRUE  
+( must leave TRUE for permit,  FALSE for skip datagramm )

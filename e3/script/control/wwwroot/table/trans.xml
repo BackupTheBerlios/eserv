@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml-stylesheet type="text/xsl" href="table.xsl" ?>
+<Trans>
+<DOMAIN>Домен</DOMAIN>
+<AUTH>Источник авторизации</AUTH>
+<AUTH_TYPE>Способ авторизации</AUTH_TYPE>
+<DIRECTORY>Почтовый каталог</DIRECTORY>
+<ACCEPT_NEU>НСП</ACCEPT_NEU>
+<FORWARD_NEU>Переправлять НСП</FORWARD_NEU>
+
+<FNAME>Имя</FNAME>
+<LNAME>Фамилия</LNAME>
+
+<users.sql>Пользователи</users.sql>
+</Trans>

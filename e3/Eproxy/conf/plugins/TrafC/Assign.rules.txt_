@@ -1,0 +1,22 @@
+\ EOF
++CanalIn` RealLineIn
++CanalOt` RealLineOt
+\ +CanalIn` Q1
+
+\ TRUE  | +CanalIn` Qtest1   
+
+Priority: 100
+PeerIP= 10.0.0.1  |  10 Priority!
+PeerIP= 127.0.0.1 |  10 Priority!
+URL =~ *exe  URL =~ *zip  OR URL =~ *rar OR | Priority 5 + Priority! \EOF
+\ PeerIP= 127.0.0.1 |  Priority: 50
+\ PeerIP= 10.0.0.1  |  Priority: 50
+PeerIP= 10.0.0.2   |  Priority 40 - Priority!
+PeerIP= 10.0.1.10  |  Priority 20 + Priority!
+PeerIP= 10.0.1.30  |  Priority 10 - Priority!
+CONTENT-LENGTH 20000 U< | Priority 10 - Priority!
+URL =~ *htm  URL =~ *html OR | Priority 5 - Priority! \EOF
+URL =~ *jpg  URL =~ *gif  OR | Priority 5 + Priority! \EOF
+URL =~ *txt CONTENT-LENGTH 10000 U< AND  | Priority 5 - Priority! \EOF
+\ CONTENT-LENGTH ( -- u ) \ MAX-INT =  \ IF unknown
+\ CONTENT-TYPE ( -- a u )

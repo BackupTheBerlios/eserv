@@ -1,0 +1,5 @@
+AvScan
+
+\ URL =~ http://localhost* | AvNoScan
+URL =~ *.jpg | AvNoScan
+URL =~ *.gif | AvNoScan

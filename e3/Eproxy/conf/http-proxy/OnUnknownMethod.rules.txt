@@ -1,0 +1,2 @@
+vFileDebug @ [IF] uUNKNOWN-COMMAND @ STR@ TYPE [THEN]
+TRUE LocalRedirect "{LANG}/unknown_method.html?unknown_command={uUNKNOWN-COMMAND @ STR@}"

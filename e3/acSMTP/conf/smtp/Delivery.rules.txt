@@ -1,0 +1,42 @@
+\ Если адрес получателя есть в списке автоответчиков, то
+\ отправить автоматический ответ.
+
+RCPTTO SMTP[AutoReply] IsInFile | EvalRules: smtp\delivery\AutoReply
+
+910 LOG
+452 LOG
+455 LOG \ for AdvSoft ProxyInspector and MailDetective
+
+\ Если письмо адресовано роботу (email получателя указан в файле ToEmailRobots),
+\ то выполняем дополнительную обработку в соответствии с правилами робота.
+
+RCPTTO SMTP[ToEmailRobots] IsInFile | EvalRules: smtp\delivery\RunRobot | \EOF
+
+\ Если получатель относится к локальным доменам, перечисленным
+\ в LocalDomains.txt, то помещаем копию сообщения в локальный ящик
+\ этого получателя. Каталог, в котором размещаются ящики, указан
+\ в списке доменов в поле DIRECTORY (FIELD4).
+
+RCPTTO GetDomainFromEmail Lists[LocalDomains] IsInFile | EvalRules: smtp\delivery\Local \EOF
+RCPTTO GetDomainFromEmail Server[DefaultDomain] COMPARE-U 0= | EvalRules: smtp\delivery\UnknownLocal \EOF
+
+\ Если почту этого получателя нужно переправлять на другой SMTP-сервер
+\ не по MX, то можно указать это в SMTP[EmailSmtpForward]
+RCPTTO SMTP[EmailSmtpForward] IsInFile | EvalRules: smtp\delivery\SmtpForward \EOF
+
+\ Если домен получателя не перечислен в списке локальных доменов,
+\ но MX этого домена указывает на наш сервер, то "до выяснения обстоятельств"
+\ поместим это сообщение в каталог mail\домен.получателя\ящик.получателя\,
+\ автоматически создавая этот каталог при необходимости.
+\ Так как наружу такую почту отправлять бессмыссленно - вернётся к нам,
+\ а удалять или отвергать не стоит - вдруг админ просто еще не успел 
+\ донастроить сервер.
+
+RCPTTO GetDomainFromEmail IsMyMX | EvalRules: smtp\delivery\UnknownLocal \EOF
+
+RCPTTO GetDomainFromEmail IsMyHostname | EvalRules: smtp\delivery\UnknownLocal \EOF
+
+\ Если получатель внешний, то пока ничего с ним делать не будем.
+\ По завершении цикла по списку получателей в списке останутся только
+\ внешние получатели, и мы подготовим письмо к отправке наружу
+\ сразу по всему этому списку (для smtpsend3.exe).

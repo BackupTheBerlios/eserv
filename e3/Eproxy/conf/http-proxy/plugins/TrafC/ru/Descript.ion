@@ -1,0 +1,2 @@
+CanalKitBlocked.html для Redirect. параметры передаются через cgi, выполняется как forth-скрипт
+CanalKitBlocked2.html для Unavailable. трансляция в контексте eproxy.exe

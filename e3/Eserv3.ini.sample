@@ -1,0 +1,26 @@
+# $Id: Eserv3.ini.sample,v 1.1 2003/12/28 16:26:50 spf Exp $
+# Eserv3.ini "перекрывает" одноименные значения в Eserv3.orig.ini,
+# а отсутствующие значения будут браться из Eserv3.orig.ini
+# !!! Описание опций и значения по умолчанию см. в Eserv3.orig.ini !!!
+
+[Server]
+HostName=myFirm.ru
+DefaultDomain={Server[HostName]}
+
+[Dirs]
+Conf=..\CONF
+
+[HTTP]
+Port=80
+PhpBin=c:\php\php.exe
+PerlBin=c:\perl\perl.exe
+
+[SMTP]
+UseAntivirus=0
+Antivirus=DrWEB
+# Antivirus=KAV
+
+[AUTH]
+UserList={Dirs[Lists]}\UserList.txt
+GroupList={Dirs[Lists]}\GroupsList.txt
+DefaultAuthSource="MD5File"

@@ -1,0 +1,1 @@
+EvalRules: plugins\pop2smtp\headers\ParseRcpt

@@ -1,0 +1,27 @@
+\ TRUE vDbDebug ! TRUE vFileDebug !
+
+\ Plugin: plugins\console
+\ Plugin: plugins\syslog
+
+Plugin: plugins\mlogc
+Plugin: plugins\service
+
+Plugin: smtp\plugins\tarpit
+Plugin: smtp\plugins\callback
+
+Plugin: smtp\plugins\robots
+
+SMTP[UseAntivirus] >FLAG
+[IF]
+  Plugin: smtp\plugins\antivirus
+  Plugin: smtp\plugins\antivirus\{SMTP[Antivirus]}
+[THEN]
+
+SMTP[UsePopFile] >FLAG
+| Plugin: smtp\plugins\popfile
+
+SMTP[UsePop2Smtp] >FLAG
+| Plugin: plugins\pop2smtp
+
+SMTP[UseScheduler] >FLAG
+| Plugin: smtp\plugins\scheduler

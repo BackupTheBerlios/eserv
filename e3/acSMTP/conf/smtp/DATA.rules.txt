@@ -1,0 +1,7 @@
+100 PAUSE \ обход глюков Outlook
+
+EvalRules: smtp\delivery\SpoolFile
+
+" 354 send the mail data, end with .{CRLF}" SMTP_FPUTS
+
+ReadData

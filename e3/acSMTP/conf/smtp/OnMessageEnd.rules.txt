@@ -1,0 +1,46 @@
+( $Id: OnMessageEnd.rules.txt,v 1.1 2003/12/28 16:27:00 spf Exp $
+  Этот обработчик вызывается, когда сообщение полностью принято в
+  файл, имя которого хранится в CURRENT-FILE, файл закрыт, но ответ
+  отправителю на команду DATA еще не дан. Т.е. самое время запустить
+  фильтры, обрабатывающие письмо целиком в поисках вирусов, спама,
+  превышения квот и т.д - есть возможность прямо во время сессии 
+  сообщить отправителю судьбу его письма. Если дается ответ 4хх,
+  то это считается ошибкой, и отправитель будет делать повторные
+  попытки, если он обычный MTA, а не спам-софт. Если дается ответ
+  5хх, то отправляющий MTA вернёт сообщение отправителю и приведет
+  нашу строку с кодом 5хх и нашим пояснением - о том, что сообщение
+  доставлено не будет, т.к. там вирус, спам, превышение квот и т.д.
+  Таким образом отпадает необходимость слать отдельные письма
+  с извещениями отправителю, т.к. его MTA сам всё сделает. И, как
+  следствие, исключается риск отправить извещение по поддельному 
+  адресу mailfrom.
+)
+
+\ Если письмо было больше заданного размера, удаляем его
+MESSAGE-SIZE MaxMessageSize > | DeleteCurrentFile " 552 ERR too large message size{CRLF}" SMTP_FPUTS \EOF \  -4007 THROW
+
+\ Проверяем на вирусы.
+SMTP[UseAntivirus] >FLAG
+| CURRENT-FILE ScanMailFile | S" smtp\filters\OnVirus" EvalRules \EOF
+
+\ Проверяем на спам через байесов классификатор POPfile
+SMTP[UsePopFile] >FLAG
+| EvalRules: smtp\filters\IsSpam | S" smtp\filters\OnSpam" EvalRules \EOF
+
+\ Фильтры содержания...
+\ Все-равно не смогу прочесть китайское письмо, зачем пытаться.
+\ И китайцу его MTA об этом скажет в возвращенном письме.
+H-SUBJECT SMTP[BlackListSubject] IsInFile
+| DeleteCurrentFile " 552 {FIELD2}: {FIELD1}{CRLF}" SMTP_FPUTS \EOF
+
+H-SUBJECT StripLwsp MimeValueDecode SMTP[BlackListSubject] IsInFile
+| DeleteCurrentFile " 552 {FIELD2}: {FIELD1}{CRLF}" SMTP_FPUTS \EOF
+
+H-CONTENT-TYPE SMTP[BlackListContentType]" IsInFile
+| DeleteCurrentFile " 552 {FIELD2}: {FIELD1}{CRLF}" SMTP_FPUTS \EOF
+
+\ Добавление заданных получателей в случае наличия определенных слов в теме.
+H-SUBJECT SMTP[SubjectWords] IsInFile | FIELD2 AddRcpt
+
+\ Иначе принимаем
+" 250 OK message accepted for delivery{CRLF}" SMTP_FPUTS

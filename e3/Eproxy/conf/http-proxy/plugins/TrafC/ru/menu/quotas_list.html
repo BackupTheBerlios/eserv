@@ -1,0 +1,83 @@
+{ S" ..\..\scripts\" SOURCE-NAME!
+  S" list_quotas.f" Included 
+  S" "
+}
+<h2>Виртуальные каналы</h2>
+<font color=red>
+{S" action" IsSet [IF] DoAction [ELSE] S" " [THEN]}</font>
+<hr>
+<h3>Существующие <a href=../docs/man.html#quota>quota</a>-каналы</h3>
+<form action={script_name}>
+<input type=hidden name=action value=delete>
+<table border=1 cellpadding=3>
+<tr><th>del?</th><th>Имя</th><th>Ограничение</th><th>На период</th> </tr>
+{ReadCfg}
+</table>
+<p>
+<input type=submit value="Удалить выбранные">
+</p>
+</form>
+<hr>
+<h3>Добавление канала</h3>
+<form action={script_name}>
+<input type=hidden name=action value=add_quota>
+
+<table border=0>
+
+<tr> 
+<td align=left>
+ <table border=0>
+  <tr> <td>
+  <acronym title=" Без пробелов и прочих спец-символов ">
+  Имя: <acronym> </th> <th> <input name=quota_name size=20> </td> 
+  </tr>
+ </table>
+</td>
+</tr> 
+
+
+<tr>
+<td>
+
+<table border=0>
+<tr align="left"> <td> <acronym title="Не менее 500 байт">
+  Ограничение объема: <acronym> </td>
+ <td> <input name=volume  size=6> </td>
+ <td> <select name=select_volume>
+      <option value="Gb">Gb
+      <option value="Mb">Mb
+      <option value="Kb">Kb
+      <option value="bytes">bytes
+      </select>
+ </td>
+ <td> <acronym title="От 10 секунд до 40 суток"> На </acronym>
+ </td>
+ <td> <input name=period size=6>
+ </td>
+ <td> <select name=select_period>
+      <option value="Weeks">(недель)
+      <option value="Days">(дней)
+      <option value="Hours">(часов)
+      <option value="Minutes">(минут)
+      <option value="Seconds">(секунд)
+      </select>
+ </td>
+</tr>
+
+</table>
+
+</td>
+</tr>
+
+</table>
+
+<p>
+<input type=submit value="Добавить">
+ Имя канала должно быть уникальным среди всех каналов <br>
+</p>
+
+</form>
+
+<hr>
+Для вступления изменений в силу Eproxy следует перезапустить
+(файл Quotas.list.txt читается только при запуске).

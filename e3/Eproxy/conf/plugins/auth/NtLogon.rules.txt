@@ -1,0 +1,4 @@
+\ CR User TYPE .( :) Pass TYPE .( >) AuthServer TYPE CR
+
+User Pass LoginUserNT UID !
+TOKEN @ | LogoutUserNT

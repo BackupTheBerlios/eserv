@@ -1,0 +1,4 @@
+/main/2/{Proxy[HostBlackList]};Черный список хостов
+/main/2/{Proxy[HostWhiteList]};Белый список хостов
+/main/2/{Proxy[UrlBlackList]};Черный список URL
+/main/2/{Proxy[UrlWhiteList]};Белый список URL

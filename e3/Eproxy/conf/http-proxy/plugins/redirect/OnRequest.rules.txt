@@ -1,0 +1,2 @@
+UrlRedirect http://www.etype.net/ http://www.eserv.ru/
+UrlRedirect http://www.yandex.ru/1 http://www.ya.ru/

@@ -1,0 +1,13 @@
+\ DEPTH .( ===1 ) . CR
+\ .( =================================================================) CR
+\ .( Received on port=) Port . .(  From IP:port=) UdpCLIENT TYPE .( :) UdpPeerPort . .( size:) RecvSize .
+\ .(  Packet: ) RecvAddr RecvSize TYPE CR
+\ DEPTH .( ===2 ) . CR
+
+Port IsUdpMappedPort DUP | SWAP ForwardPacket \ .( query) CR
+                     0=  | ForwardReplyPacket \ .( reply) CR
+
+\ DEPTH .( ===3 ) . CR
+
+\ DumpUdpLists
+\ DEPTH .( ===4 ) . CR

@@ -1,0 +1,5 @@
+UrlAlias .r http://www.rambler.ru/
+UrlAlias .y http://www.yandex.ru/
+UrlAlias .d ftp://ftp.eserv.ru/pub/
+UrlAlias .e http://www.eserv.ru/
+UrlAlias .f http://forum.eserv.ru/

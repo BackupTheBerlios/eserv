@@ -1,0 +1,20 @@
+TARGET-URI S" ?" SEARCH | 1- SWAP 1+ SWAP GetParamsFromString 1 2
+2DROP
+
+200 TO vHttpReplyCode
+
+TARGET-FILE S" monitor.txt" SEARCH NIP NIP | HtmlMonitoring \EOF
+
+TARGET-URI S" /av/db-info" COMPARE 0= | AvGetDatabasesInfo 2DUP TYPE CR " HTTP/1.0 200 OK{CRLF}{CRLF}{s}{CRLF}" STR@ FPUT StopProtocol \EOF
+\ TARGET-URI S" /av/reload" COMPARE 0= | AvReload AvGetDatabasesInfo 2DUP TYPE CR " HTTP/1.0 200 OK{CRLF}{CRLF}{s}{CRLF}" STR@ FPUT StopProtocol \EOF
+\ TARGET-URI S" /av/reload2" COMPARE 0= | AvUnload AVkav UsedAntivirus ! S" h:\eserv2\antivirus\kav\data" S" g:\PRO\antivirus\KAV-API\new_com4\KAVSS\bin" AvLoad AvGetDatabasesInfo 2DUP TYPE CR " HTTP/1.0 200 OK{CRLF}{CRLF}{s}{CRLF}" STR@ FPUT StopProtocol \EOF
+
+
+" HTTP/1.0 200 OK
+Content-Type: text/html
+Connection: close
+
+" FPUTS
+
+" conf\http-proxy\wwwroot{TARGET-FILE 2DUP />\}" STR@
+EVAL-FILE FPUT TRUE TO vStopProtocol

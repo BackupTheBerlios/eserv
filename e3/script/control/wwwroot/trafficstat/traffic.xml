@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml-stylesheet type="text/xsl" href="/trafficstat/traffic.xsl?y={y}&amp;m={m}"?>
+<TrafficStat>
+<Period><YYYY>{y}</YYYY><MM>{m}</MM></Period>
+<Traffic>
+{S" Traffic.sql" SqlQueryXmlFile}
+</Traffic>
+
+<ProtoTraffic>
+{S" ProtoTraffic.sql" SqlQueryXmlFile}
+</ProtoTraffic>
+
+</TrafficStat>

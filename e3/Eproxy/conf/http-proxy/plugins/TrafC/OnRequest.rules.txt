@@ -1,0 +1,14 @@
+\ 600 LOG
+NewlyCanalsKit \ обновление набора каналов (на каждый HTTP-запрос)
+
+\ S" Assign.rules.txt" +PathTrafC INCLUDED \ общий  Assign.rules
+Include Assign.rules.txt \ из каталога, где лежит этот OnRequest.rules.txt
+
+\ " CanalKit: {WhatCanals}{CRLF}" STYPE
+\ " CanalKit: {WhatCanals} | {User-} {URL} {CRLF}" STYPE
+1310 LOG
+
+IsCanalKitBlocked | 1311 LOG Unavailable conf\http-proxy\wwwroot\ru\CanalKitBlocked2.html
+\ IsCanalKitBlocked | .( CanalKitBlocked!!!) CR TRUE TO vStopProtocol
+\ IsCanalKitBlocked | LocalRedirect {LANG}/CanalKitBlocked.html?CanalKit={WhatCanals}&TillUnblock={TillUnblock}
+\ 1000 LOG

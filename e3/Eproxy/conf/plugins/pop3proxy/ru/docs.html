@@ -1,0 +1,32 @@
+<pre>
+Ќазначение:
+pop3proxy - дл€ работы из LAN с внешними POP3-серверами без использовани€
+            многочисленных TCPMAP (по одному на каждый POP3-сервер).
+            »спользуетс€ один порт (в данном описании 111, но можно мен€ть),
+            "эмулирующий" POP3-сервер. »м€ внешнего POP3-сервера указываетс€
+            в команде USER протокола POP3: вместо USER username используетс€
+            USER username@server или USER server:username. —оответственно
+            в POP3-клиенте в поле Login указываетс€ username@server или
+            server:username.
+
+”становка:
+1. –аспаковать архив в каталог Eproxy (уже сделано, если читаете это)
+2. ¬ conf\ListenPorts.rules.txt добавить порт дл€ POP3PROXY (например, 111):
+Listen:
+333
+3128
+3121
+1080
+111
+
+3. ¬ conf\OnConnect.rules.txt добавить строку
+Port= 111   | POP3PROXY  \EOF
+
+4. ¬ conf\OnThreadConnect.rules.txt добавить строку
+Port= 111  | S" plugins\pop3proxy\OnThreadConnect" EvalRules \EOF
+
+5. ¬ conf\OnStartupPlugins.rules.txt добавить строку
+Plugin: plugins\pop3proxy
+
+6. ѕерезапустить Eproxy.
+</pre>

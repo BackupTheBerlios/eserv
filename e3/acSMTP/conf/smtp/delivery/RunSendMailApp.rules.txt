@@ -1,0 +1,2 @@
+\ запуск агента отправки исходящей почты
+SMTP[SendMailApp] StartApp DROP

@@ -1,0 +1,52 @@
+{ S" ..\..\scripts\" SOURCE-NAME!
+  S" list_bands.f" Included 
+  S" "
+}
+<h2>Виртуальные каналы</h2>
+<font color=red>
+{S" action" IsSet [IF] DoAction [ELSE] S" " [THEN]}</font>
+<hr>
+<h3>Существующие <a href=../docs/man.html#bandwidth>band</a>-каналы</h3>
+
+<form action={script_name}>
+<input type=hidden name=action value=delete>
+<table border=1 cellpadding=2>
+<tr><th>del?</th><th>Имя</th>
+<th> 
+ <acronym title="Максимальная скорость трафика через канал == пропускная способность == ширина полосы пропускания канала.">
+ Скорость, cps</acronym> </th>
+</tr>
+{ReadCfg}
+</table>
+
+<p>
+<input type=submit value="Удалить выбранные">
+</p>
+</form>
+<hr>
+<h3>Добавление канала</h3>
+<form action={script_name}>
+<input type=hidden name=action value=add_band>
+
+
+<table>
+<tr>
+<td align=right> <acronym title=" Без пробелов и прочих спец-символов ">
+    Имя: </acronym> </td> <td> <input name=band_name size=20> <td> </tr>
+<tr>
+<td align=right> <acronym title="От 1 cps до 100 Кcps">
+    Скорость, cps: </acronym> </td>
+<td> <input name=band_cps size=20> </td> </tr>
+
+
+</table>
+<p>
+<input type=submit value="Добавить"> 
+ Имя канала должно быть уникальным среди всех каналов <br>
+</p>
+</form>
+
+<hr>
+Для вступления изменений в силу, Eproxy следует перезапустить
+(файл Bands.list.txt читается только при запуске).
+<hr>

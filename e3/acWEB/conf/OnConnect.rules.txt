@@ -1,0 +1,15 @@
+( «десь указываютс€ правила обработки клиентских соединений.
+  ќбычно требуетс€ просто запустить поток интерпретации определенного
+  проткола в зависимости от номера порта, к которому подключилс€ клиент.
+  Ќапример:
+  Port= 21  | FTP
+  Port= 25  | SMTP
+  Port= 80  | HTTP
+  Port= 110 | POP3
+
+  ћогут быть и более сложные правила, например:
+  " 400 Your IP {IP NtoA} is blocked." FPUTS
+  Port= 80 | InitConnection S" " ReadUpTo DROP " HTTP/1.1 503 Service Unavailable{CRLF}Connection: close{CRLF}{CRLF}503 Service Unavailable" FPUTS CloseConnection
+)
+
+HTTP

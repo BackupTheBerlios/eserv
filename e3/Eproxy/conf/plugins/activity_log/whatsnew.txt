@@ -1,0 +1,2 @@
+10.Jul.2002
+  * Формат: DATETIME IP timeperiod_ms cps-in cps-out

@@ -1,0 +1,5 @@
+14.08.2003:
+
+В PopFile Classifier/Bayes.pm v.173 немного поменялся XMLRPC API,
+что заставило поменять и реализацию функций
+PopFileAddToBucket и PopFileDelFromBucket в этом plugin'е.

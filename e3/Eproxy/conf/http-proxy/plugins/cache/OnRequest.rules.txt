@@ -1,0 +1,5 @@
+\ IsCachedFile DUP
+\ | FileIsOlderThan: 0 | DROP RefreshCache \EOF
+\ | SendFromCache \EOF
+
+IsCachedFile | RefreshCache

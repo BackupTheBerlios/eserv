@@ -1,0 +1,4 @@
+\ Если подключились не из ЛС, то сразу отключаем клиента
+IsLanClient 0= | \EOF
+
+Port >STR PROXY[TcpMap] IsInFile | " MAPTO: {FIELD2} {FIELD3}" STR@ EVALUATE \EOF

@@ -1,0 +1,11 @@
+DelayAfterCommand: {IMAP[DelayAfterCommand]}
+
+\ Если клиент подключился к 110 порту, то это POP3
+
+Port= {POP[Port]} | POP[Active] >NUM 0= | " -ERR temporary down for maintenance{CRLF}" FPUTS StopProtocol \EOF
+Port= {POP[Port]} | " +OK <{GetCurrentProcessId}.{GetTickCount}@{Server[HostName]}> POP3 Eserv/3.{IMAP-SERVER-VERSION}{BETA} server ready{CRLF}" FPUTS \EOF
+
+\ Иначе (143 порт) - IMAP:
+IMAP[Active] >NUM 0= | " * NO {Server[HostName]} IMAP server temporary down for maintenance{CRLF}" FPUTS StopProtocol \EOF
+DebugProtocol
+" * OK {Server[HostName]} IMAP4rev1 Eserv/3.{IMAP-SERVER-VERSION}{BETA} server ready{CRLF}" FPUTS

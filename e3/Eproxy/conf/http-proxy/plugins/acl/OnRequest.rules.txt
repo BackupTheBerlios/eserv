@@ -1,0 +1,12 @@
+\ Если URL или TARGET-HOST находятся в белых списках
+\ (при соблюдении прочих опциональных условий в этих списках),
+\ то черные списки игнорируются, доступ предоставляется.
+URL          IsInFile: {PROXY[UrlWhiteList]}  | ProxyCheckRules | \EOF
+TARGET-HOST  IsInFile: {PROXY[HostWhiteList]} | ProxyCheckRules | \EOF
+
+\ Если в белых списках нет, то проверяем черные.
+\ Если в черном списке и прочие условия выполняются, то закрываем доступ.
+URL          IsInFile: {PROXY[UrlBlackList]}  | ProxyCheckRules | ProxyAccessDenied \EOF
+TARGET-HOST  IsInFile: {PROXY[HostBlackList]} | ProxyCheckRules | ProxyAccessDenied \EOF
+
+\ Иначе доступ открыт.

@@ -1,0 +1,7 @@
+" {MAILFROM}!{RANDOM-ID}.eml" STR@ 2DUP
+" {SMTP[Spam]}\{s}" STR@
+\ CopyCurrentFileTo
+CopyFileWithRcptsTo
+" 550 Your message is classified as SPAM! If this an error, please click here: http://{Server[HostName]}/MailClassify/{s}{CRLF}" SMTP_FPUTS
+923 LOG
+920 LOG

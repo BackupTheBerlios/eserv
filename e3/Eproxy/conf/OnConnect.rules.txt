@@ -1,0 +1,16 @@
+LogLevel: 6
+Timeout: 60000
+
+Port= 3128  | HTTP-PROXY \EOF
+Port= 3121  | FTP-PROXY  \EOF
+Port= 1080  | SOCKS      \EOF
+
+Port= 334   | RConsole   \EOF
+Port= 111   | POP3PROXY  \EOF
+
+\ ѕросто пример ручного задани€ отображений портов TCPMAP:
+\ Port= 81    | MAPTO: 10.1.1.2 80      \EOF
+\ Port= 14143 | MAPTO: imap.enet.ru 143 \EOF
+
+\ ќтображени€, заданные в базе PROXY[TcpMap]
+EvalRules: TcpMaps

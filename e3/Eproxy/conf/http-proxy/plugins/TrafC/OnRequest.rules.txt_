@@ -1,0 +1,8 @@
+\ 600 LOG
+NewlyCanalsKit
+IsLocalWebRequest | \EOF
+Include Assign.rules.txt
+\ " CanalKit: {WhatCanals}{CRLF}" STYPE
+IsCanalKitBlocked | .( CanalKitBlocked ) CR LocalRedirect {LANG}/CanalKitBlocked.html?CanalKit={WhatCanals}&TillUnblock={TillUnblock}
+\ IsCanalKitBlocked | .( redirected ) CR  StopProtocol
+\ 1000 LOG

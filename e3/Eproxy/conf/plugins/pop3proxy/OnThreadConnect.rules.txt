@@ -1,0 +1,3 @@
+PeerIP IsLanIP | " +OK Eproxy POP3PROXY ready{CRLF}" FPUTS \EOF
+
+" -ERR Eproxy POP3PROXY access denied{CRLF}" FPUTS -1 AbortProtocol

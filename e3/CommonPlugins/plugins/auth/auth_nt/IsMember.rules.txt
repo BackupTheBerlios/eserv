@@ -1,0 +1,45 @@
+SetNtServer
+
+[UNDEFINED] NtIsMemberOf [IF]
+
+WINAPI: NetUserGetLocalGroups   NETAPI32.DLL
+WINAPI: NetUserGetGroups        NETAPI32.DLL
+WINAPI: NetApiBufferFree        NETAPI32.DLL
+
+USER uIsMemberOf
+
+: ForEachGroupOfUser { usera useru xt \ totalentries entriesread bufptr -- }
+  usera useru CurrentUser S!
+  ^ totalentries ^ entriesread 
+  -1 ( MAX_PREFERRED_LENGTH) ^ bufptr
+  1 ( LG_INCLUDE_INDIRECT) 0 ( level) usera useru >UNICODE DROP
+  AuthServer >UNICODE DROP ( server)
+  NetUserGetLocalGroups 0= ( NERR_Success)
+  IF bufptr entriesread 0 ?DO I CELLS OVER + @ xt EXECUTE LOOP DROP THEN
+  bufptr NetApiBufferFree DROP
+
+  0 -> totalentries 0 -> entriesread 0 -> bufptr
+  ^ totalentries ^ entriesread 
+  -1 ( MAX_PREFERRED_LENGTH) ^ bufptr
+  0 ( level) usera useru >UNICODE DROP
+  AuthServer >UNICODE DROP ( server)
+  NetUserGetGroups 0= ( NERR_Success)
+  IF bufptr entriesread 0 ?DO I CELLS OVER + @ xt EXECUTE LOOP DROP THEN
+  bufptr NetApiBufferFree DROP
+;
+: IsMemberOf1 ( group_z -- )
+  UASCIIZ> UNICODE>
+  CurrentGroup @ STR@ COMPARE 0= IF TRUE uIsMemberOf ! THEN
+;
+: NtIsMemberOf ( usera useru groupa groupu -- flag )
+  FALSE uIsMemberOf !
+  CurrentGroup S! ['] IsMemberOf1 ForEachGroupOfUser
+  uIsMemberOf @
+;
+: NtIsMemberOf: ( usera useru "group" -- flag )
+  ParseStr NtIsMemberOf
+;
+
+[THEN]
+
+User 2SWAP NtIsMemberOf

@@ -1,0 +1,1 @@
+Run as WindowsNT/2000 service.

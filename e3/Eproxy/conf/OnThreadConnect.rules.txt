@@ -1,0 +1,5 @@
+Port= 1080 | S" socks\OnThreadConnect"     EvalRules \EOF
+Port= 3121 | S" ftp-proxy\OnThreadConnect" EvalRules \EOF
+Port= 111  | S" plugins\pop3proxy\OnThreadConnect" EvalRules \EOF
+
+LogLevel: 7

@@ -1,0 +1,11 @@
+\ В AutoReply.txt во втором поле указано имя файла,
+\ обработаем этот файл (его имя в переменной FIELD2) как шаблон
+\ ответа, и положим ответ в каталог отправки. Обратный адрес
+\ будет autoreply_bounces@домен_получателя, а не адрес автоответчика,
+\ чтобы роботы не вступали в переписку с автоответчиками :)
+
+FIELD2 S@ " {SMTP[Out]}\autoreply_bounces@{RCPTTO GetDomainFromEmail}!{RANDOM-ID}.eml" STR@ EVAL-FILE-TO
+
+\ И отправим автоответ:
+
+EvalRules: smtp\delivery\SendMail

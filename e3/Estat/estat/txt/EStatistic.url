@@ -1,0 +1,6 @@
+[DEFAULT]
+BASEURL=http://localhost:3128/estat/
+
+[InternetShortcut]
+URL=http://localhost:3128/estat/
+Modified=401D6D778802BE018A

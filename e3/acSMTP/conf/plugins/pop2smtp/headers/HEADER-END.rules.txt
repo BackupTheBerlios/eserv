@@ -1,0 +1,4 @@
+\ «апускаетс€ в конце приема заголовка.
+
+PopSaveReceivedMsgid
+\ DumpRcpts

@@ -1,0 +1,5 @@
+\ LocalRedirect {LANG}/readheaders_error.html?error_code={uREADHEADERS-ERROR @}
+\ S" Read headers error" 120 LOG
+\ uREADHEADERS-ERROR @ 110 LOG
+
+Unavailable conf\http-proxy\wwwroot\{LANG}\readheaders_error2.html

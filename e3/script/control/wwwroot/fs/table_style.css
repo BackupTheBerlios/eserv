@@ -1,0 +1,9 @@
+table { border-color: black; 
+    FONT-SIZE: 11px;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+}
+input { 
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+ }     
+body { background-color:#E0F0F0; }

@@ -1,0 +1,10 @@
+{
+ S" ..\scripts\install.f" INCLUDED S" "
+}
+<h2>Stop service</h2>
+<font color=red>
+{IsServiceStarted
+[IF] StopService
+[ELSE] S" The service is not started" [THEN]
+}</font>
+</form>

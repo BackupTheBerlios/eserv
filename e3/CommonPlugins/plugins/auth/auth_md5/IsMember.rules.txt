@@ -1,0 +1,2 @@
+\ на входе S" имя группы" S" {Auth[GroupList]}" S" {Auth[UserList]}"
+2DROP SetField11 User 2SWAP FIELD11 IsInFile2

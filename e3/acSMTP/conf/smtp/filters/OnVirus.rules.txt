@@ -1,0 +1,13 @@
+S" virus" SetMessageClass
+
+MoveCurrentFileTo: "{SMTP[Infected]}\{MAILFROM}!{RANDOM-ID}.eml" 
+" 550 Your message is infected with VIRUS!: {VIRUS-NAME}{CRLF}" SMTP_FPUTS
+924 LOG
+920 LOG
+
+SMTP[SendVirusNotify] >FLAG
+[IF]
+" {SMTP[Spool]}\{MAILFROM}!{RANDOM-ID}.eml" STR@ 2DUP FixFilename SetCurrentFile
+
+" {SMTP[Templates]}\OnVirus.pat.txt" STR@ CURRENT-FILE EVAL-FILE-TO
+[THEN]

@@ -1,0 +1,1 @@
+" Sample mail robot processing file {''}{ROBOTFILENAME}{''}" STR@ 707 LOG

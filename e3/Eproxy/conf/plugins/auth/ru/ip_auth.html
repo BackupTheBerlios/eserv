@@ -1,0 +1,37 @@
+{
+ S" ..\scripts\lib.f" INCLUDED
+ S" ..\scripts\ip_auth_lib.f" INCLUDED S" "
+}
+<h2>IP-авторизация</h2>
+<font color=red>
+{S" action" IsSet 
+[IF] S" action" EVALUATE ALSO ACTIONS EVALUATE PREVIOUS
+[ELSE] S" " [THEN]
+}</font>
+<hr>
+<h3>Назначение имени пользователя по IP-адресу</h3>
+<table border=0 width=100%><tr><td>
+
+<form action={script_name}>
+<input type=hidden name=action value=delete>
+<table border=1 class=small>
+<tr><th>on/off</th><th>IP или подсеть</th><th>Считается пользователем</th></tr>
+{S" ..\IpAuth.rules.txt" IpAuths}
+</table>
+<p><input type=submit value=Удалить>
+</form>
+
+</td><td align=center valign=top>
+
+<form action={script_name}>
+<input type=hidden name=action value=add>
+IP или подсеть: <input type=text name=ip size=31><br>
+считать пользователем: <select name=username>
+{ListUsers}
+</select>
+<p><input type=submit value=Добавить>
+</form>
+
+</td></tr></table>
+<p>
+<hr>

@@ -1,0 +1,15 @@
+\ .( socks server: connect in, ) vClientSocket . CR
+1410 LOG
+
+TRUE TO SocksAuthNeed
+\ FALSE TO SocksAuthNeed
+\ LogLevel: 7
+
+\ S" plugins\auth\OnRequest" EvalRules \ установка $LOGIN
+AuthMethod: AuthDomains
+
+ProcessSocks
+
+\ " LAST-ERROR= {uLAST-ERROR @}  SOCKS-REP= {uSOCKS-REP @} " STYPE CR
+
+\ .( socks server: client disconnected, ) vClientSocket . CR

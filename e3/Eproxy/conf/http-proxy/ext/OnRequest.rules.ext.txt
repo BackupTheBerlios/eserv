@@ -1,0 +1,8 @@
+\ ускоренный, но усложненный, вариант (не активизирован)
+
+S" http-proxy\ip-list" ' EvalRules CATCH
+2 = | URL =~ *create_ip_list.html* 0= | LocalRedirect create_ip_list.html \EOF
+0=  | LocalRedirect forbidden.html \EOF
+
+S" http-proxy\OnRequestPlugins" EvalRules
+ActionChanged 0= | IsLocalWebRequest | S" http-proxy\LocalWeb" SetAction \EOF

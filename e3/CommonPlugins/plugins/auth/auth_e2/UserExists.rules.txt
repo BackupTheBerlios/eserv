@@ -1,0 +1,24 @@
+[UNDEFINED] AuthFileUserExists [IF]
+
+: AuthFileUserExists ( S" file" -- flag )
+  { \ f flag }
+  R/O OPEN-FILE-SHARED
+  IF DROP FALSE EXIT THEN
+  -> f
+  BEGIN
+    flag 0= IF f FREFILL ELSE FALSE THEN
+  WHILE
+    SOURCE S" :" SEARCH NIP NIP
+    IF
+      BL SKIP
+      [CHAR] : PARSE User COMPARE-U 0=
+      IF TRUE -> flag THEN
+    THEN
+  REPEAT
+  f CLOSE-FILE THROW
+  POSTPONE \
+  flag
+;
+[THEN]
+
+AuthFileUserExists

@@ -1,0 +1,9 @@
+\ 2SWAP " {AUTH[AuthPlugins]}\auth_odbc\{s}\exists.sql" STR@ EVAL-FILE 2SWAP
+\ SetField11 User 2SWAP FIELD11
+\ IsInDb
+
+2SWAP " {AUTH[AuthPlugins]}\auth_odbc\{s}\exists.sql" STR@ EVAL-FILE 
+\ 2DUP TYPE CR
+2SWAP
+\ 2DUP TYPE CR
+LoginUserDB

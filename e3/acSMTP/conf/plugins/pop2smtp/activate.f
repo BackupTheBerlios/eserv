@@ -1,0 +1,14 @@
+:NONAME
+  S" Pop2Smtp[Boxes]" EVALUATE ['] Pop2SmtpDb ForEachFileRecord
+; TASK: P2ST-
+
+:NONAME
+ BEGIN
+   0 P2ST- START -1 OVER WAIT 2DROP
+   CLOSE-FILE THROW
+   [ Pop2Smtp[PollInterval] >NUM ] LITERAL 60000 * PAUSE
+ AGAIN
+; TASK: P2S-
+
+0 P2S- START CLOSE-FILE THROW
+

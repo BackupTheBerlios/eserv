@@ -1,0 +1,168 @@
+A.small:Hover  {
+	background-color : White;
+	color : Blue;
+	text-decoration : none;
+}
+A.small80:Hover  {
+	background-color : White;
+	color : Blue;
+	text-decoration : none;
+}
+
+body, ul, th, td {
+	font-family: arial,helvetica,sans-serif;
+	font-size: 95%;
+}
+
+p {
+	font-family: verdana,arial,helvetica,sans-serif;
+	font-size: 75%;
+}
+
+p.longtext {
+	font-family: verdana,arial,helvetica,sans-serif;
+	font-size: 75%;
+	text-align: justify;
+	text-indent: 15px;
+}
+p.comment {
+	font-size: 80%;
+	margin-left: 20px;
+}
+
+em {
+	font-weight: bold;
+	font-style: italic;
+}
+
+acronym {
+        border-bottom: 1px dashed #00cc00;
+        cursor: help;
+}
+
+.error {
+        color: #cc0000;
+}
+
+.date {
+	font-size: 85%;
+	color: green;
+}
+.date1 {
+	font-size: 85%;
+	font-style: italic;
+	color: #6666cc;
+}
+
+.sidebar {
+	font-size: 75%;
+}
+
+code, pre {
+	font-family: "andale mono", "monotype.com", "courier new", monospace;
+	font-size: 90%;
+}
+
+h1 {
+	font-family: arial,helvetica,sans-serif;
+	font-size: 140%;
+	font-weight: bold;
+	color: #000066;
+}
+
+h2 {
+	font-family: arial,helvetica,sans-serif;
+	font-size: 125%;
+	font-weight: bold;
+	color: #000066;
+}
+
+h3 {
+	font-family: arial,helvetica,sans-serif;
+	font-size: 110%;
+	font-weight: bold;
+	color: #000066;
+}
+
+h4 {
+	font-family: arial,helvetica,sans-serif;
+	font-size: 100%;
+	font-weight: bold;
+	color: #000066;
+}
+
+small {
+	font-family: verdana,arial,helvetica,sans-serif;
+	font-size: 75%;
+}
+
+a.small {
+	font-family: verdana,arial,helvetica,sans-serif;
+	font-size: 75%;
+	text-decoration: none;
+}
+a.small80 {
+	font-family: verdana,arial,helvetica,sans-serif;
+	font-size: 75%;
+	text-decoration: none;
+        color: white;
+}
+
+.tableTitle {
+	font-family: verdana,arial,helvetica,sans-serif;
+	font-weight: bold;
+}
+
+.tableExtras {
+	font-family: verdana,arial,helvetica,sans-serif;
+	font-size: 85%;
+	color: #FFFFFF;
+}
+table.small {
+	font-family: verdana,arial,helvetica,sans-serif;
+	font-size: 75%;
+	text-decoration: none;
+}
+
+
+input {
+	font-family: verdana,arial,helvetica,sans-serif;
+}
+
+textarea {
+	font-family: "andale mono", "monotype.com", "courier new", monospace;
+}
+
+input.small, select.small {
+	font-family: verdana,arial,helvetica,sans-serif;
+	font-size: 75%;
+}
+
+
+input.user-option {
+	font-size: 75%;
+        background: #eeffee;
+}
+input.def-option {
+	font-size: 75%;
+        background: #ffeeee;
+}
+
+textarea.small {
+	font-family: "andale mono", "monotype.com", "courier new", monospace;
+	font-size: 75%;
+}
+
+p.formerror {
+        border: 1px solid #ff0000;
+        color: #000000;
+        background: #ffeeee;
+        padding: 2px 4px;
+}
+ul.small, li.small {
+	font-family: verdana,arial,helvetica,sans-serif;
+	font-size: 75%;
+	margin-left: 20px; 
+}
+.Shown  { DISPLAY: block }
+.Hidden { DISPLAY: none  }

@@ -1,0 +1,16 @@
+<div ID="{PluginName}Parent" CLASS="parent">
+<a href="/conf/{PluginPath}/{LANG}/docs.html" onClick="expandIt('{PluginName}'); return false;">
+<img src="/images/plus.gif" border="0" alt="+" width="9" height="9" id="{PluginName}Img"></a>
+
+<a href="/conf/{PluginPath}/{LANG}/docs.html" onClick="expandIt('{PluginName}');">
+Управление доступом (ACL)</a>
+</div>
+
+<div ID="{PluginName}Child" CLASS="child">
+<ul>
+<li><a class="item" HREF="/main/2/{Proxy[HostBlackList]}">Черный список хостов</a>
+<li><a class="item" HREF="/main/2/{Proxy[HostWhiteList]}">Белый список хостов</a>
+<li><a class="item" HREF="/main/2/{Proxy[UrlBlackList]}">Черный список URL</a>
+<li><a class="item" HREF="/main/2/{Proxy[UrlWhiteList]}">Белый список URL</a>
+</ul>
+</div>

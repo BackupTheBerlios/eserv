@@ -1,0 +1,23 @@
+{
+ S" ..\scripts\Plugins.f" INCLUDED S" "
+}
+<h2>Plugins state</h2>
+<font color=red>
+{S" action" IsSet 
+[IF] S" action" EVALUATE ALSO ACTIONS EVALUATE PREVIOUS
+[ELSE] S" " [THEN]
+}</font>
+<hr>
+<h3>Plugins</h3>
+<form action={script_name}>
+<input type=hidden name=action value=update>
+<table border=1>
+<tr><th>on/off</th><th>Name</th><th>Description</th></tr>
+{S" ..\OnStartupPlugins.rules.txt" ShowPlugins}
+</table>
+<p>
+<input type=submit value=update>
+</form>
+<p>
+<hr>
+</form>

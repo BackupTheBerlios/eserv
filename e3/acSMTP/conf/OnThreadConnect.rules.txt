@@ -1,0 +1,18 @@
+Timeout: 600000
+MaxMessageSize: {SMTP[MaxMessageSize]}
+
+SMTP[Active] >NUM 0=
+| " 451 Sorry, this server is temporary down for maintenance. Please try again later." SMTP_FPUTS StopProtocol \EOF
+
+CLIENT SMTP[IpBlackList] IsInFile
+PeerIP:Mask= 127.0.0.0:255.0.0.0 OR \ просто пример явного задания сетевой маски вне базы
+PeerIP= 127.0.0.1 0= AND            \ блокируем 127.*.*.* кроме 127.0.0.1
+| " 421 {CLIENT}, your IP is in my BlackList. {FIELD2} {DATE}{CRLF}" SMTP_FPUTS StopProtocol 770 LOG \EOF
+
+CLIENT Lists[LocalNetworks] IsInFile
+DUP 0= | DROP CLIENT SMTP[IpWhiteList] IsInFile
+
+DUP | " 220 {Server[HostName]} Eserv/3.{ABUILD} ESMTP. {FIELD2} {FIELD3} {DATE}{CRLF}" SMTP_FPUTS
+    | FIELD3 SetLoggedUser TRUE UID ! 771 LOG \EOF
+
+" 220 {Server[HostName]} Eserv/3.{ABUILD} ESMTP. {DATE}{CRLF}" SMTP_FPUTS 700 LOG

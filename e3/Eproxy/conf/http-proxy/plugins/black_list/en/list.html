@@ -1,0 +1,44 @@
+{
+ S" ..\scripts\list.f" INCLUDED S" "
+}
+<h2>Black list</h2>
+<font color=red>
+{S" action" IsSet 
+[IF] S" action" EVALUATE ALSO ACTIONS EVALUATE PREVIOUS
+[ELSE] S" " [THEN]
+}</font>
+<hr>
+<h3>Active rules</h3>
+<form action={script_name}>
+<input type=hidden name=action value=delete>
+<table border=1>
+<tr><th>&nbsp</th><th>Type</th><th>Site/Url</th><th>For users</th><th>Rules</th></tr>
+{S" ..\OnRequest.rules.txt" INCLUDED uStr @ STR@}
+</table>
+<p>
+<input type=submit value=delete>
+</form>
+<p>
+<hr>
+<h3>Add SITE processing rule</h3>
+<form action={script_name}>
+<input type=hidden name=action value=add_site>
+Site: <input name=site size=50><br>
+Deny this site? : <input type=checkbox name=deny checked><br>
+<a href=users.html>For users</a> (optional) : <input name=users size=15><br>
+<a href=rules.html>Additional rules</a> (optional) : <input name=rules size=30><br>
+<input type=submit value="add site">
+</form>
+<p>
+<hr>
+<h3>Add URL processing rule</h3>
+<form action={script_name}>
+<input type=hidden name=action value=add_url>
+URL: <input name=url size=50><br>
+Deny this URL? : <input type=checkbox name=deny checked><br>
+<a href=users.html>For users</a> (optional) : <input name=users size=15><br>
+<a href=rules.html>Additional rules</a> (optional) : <input name=rules size=30><br>
+<input type=submit value="add url">
+</form>
+<p>
+<hr>

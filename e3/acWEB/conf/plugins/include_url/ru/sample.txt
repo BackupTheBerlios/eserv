@@ -1,0 +1,1 @@
+{include: /local_uri} или {include: http://some_url}.

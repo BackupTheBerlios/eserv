@@ -1,0 +1,4 @@
+AUTH[DefaultAuthSource] AUTH[AuthSources] IsInFile 0= | \EOF
+
+FIELD4 S@ DUP 0= | 2DROP
+FIELD3 S@ " {AUTH[AuthPlugins]}\{FIELD2}\DoLogin.rules.txt" STR@ INCLUDED

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml-stylesheet type="text/xsl" href="/mailstat/mailstat.xsl?y={y}&amp;m={m}"?>
+<MailStat>
+<Period><YYYY>{y}</YYYY><MM>{m}</MM></Period>
+<RecvMail>
+{S" RecvMail.sql" SqlQueryXmlFile}
+</RecvMail>
+
+<RecvSpam>
+{S" RecvSpam.sql" SqlQueryXmlFile}
+</RecvSpam>
+</MailStat>

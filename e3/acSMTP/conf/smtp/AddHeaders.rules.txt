@@ -1,0 +1,8 @@
+\ ƒобавление заголовков в начало письма
+
+" Received: from [{CLIENT}] (helo={INCOMINGHOST})
+	by {Server[HostName]} ({PROG-NAME}.{ABUILD}) with {SMTP-PROT} id {uCurrentThreadNumber @}
+	for <{RCPTTO}>; {DATE}" STR@ WMCR
+
+\ " X-MailFrom: {MAILFROM}
+\ X-MailServer: {PROG-NAME}.{KBUILD}.{ABUILD}/{ADATE}" STR@ WMCR
